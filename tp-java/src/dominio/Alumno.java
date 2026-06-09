@@ -1,6 +1,7 @@
 package dominio;
 
 
+import dominio.excepciones.DatoInvalidoException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -13,7 +14,24 @@ public class Alumno implements Serializable, Comparable<Alumno>{
     private final String nombre;
     private final LocalDate fechaNacimiento;
 
-    public Alumno(int matricula, String apellido, String nombre, LocalDate fechaNacimiento){
+    public Alumno(int matricula, String apellido, String nombre, LocalDate fechaNacimiento)
+            throws DatoInvalidoException {
+        if (matricula <= 0) {
+            throw new DatoInvalidoException("La matrícula debe ser mayor que cero.");
+        }
+        if (apellido == null || apellido.isBlank()) {
+            throw new DatoInvalidoException("El apellido del alumno es obligatorio.");
+        }
+        if (nombre == null || nombre.isBlank()) {
+            throw new DatoInvalidoException("El nombre del alumno es obligatorio.");
+        }
+        if (fechaNacimiento == null) {
+            throw new DatoInvalidoException("La fecha de nacimiento es obligatoria.");
+        }
+        if (fechaNacimiento.isAfter(LocalDate.now())) {
+            throw new DatoInvalidoException("La fecha de nacimiento no puede ser futura.");
+        }
+
         this.matricula=matricula;
         this.apellido=apellido;
         this.nombre=nombre;

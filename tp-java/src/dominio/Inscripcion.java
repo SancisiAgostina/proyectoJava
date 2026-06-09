@@ -18,7 +18,18 @@ public class Inscripcion implements Serializable {
     private final Modalidad modalidad;
     private final Set<Clase> clasesAsistidas = new HashSet<>();
 
-    public Inscripcion(Alumno alumno, Asignatura asignatura, Modalidad modalidad){
+    public Inscripcion(Alumno alumno, Asignatura asignatura, Modalidad modalidad)
+            throws DatoInvalidoException {
+        if (alumno == null) {
+            throw new DatoInvalidoException("El alumno de la inscripción es obligatorio.");
+        }
+        if (asignatura == null) {
+            throw new DatoInvalidoException("La asignatura de la inscripción es obligatoria.");
+        }
+        if (modalidad == null) {
+            throw new DatoInvalidoException("La modalidad de la inscripción es obligatoria.");
+        }
+
         this.alumno=alumno;
         this.asignatura=asignatura;
         this.modalidad=modalidad;

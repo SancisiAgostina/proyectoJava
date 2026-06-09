@@ -2,6 +2,7 @@ package dominio;
 
 import dominio.enums.Modalidad;
 import dominio.excepciones.DatoInvalidoException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -11,18 +12,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PorcentajeAsistenciaTest {
 
-    private final Alumno alumno = new Alumno(
-            1, "Perez", "Ana", LocalDate.of(2000, 1, 1));
-    private final Asignatura asignatura =
-            new Obligatoria("OB1", "Obligatoria", 1, true);
+    private Alumno alumno;
+    private Asignatura asignatura;
+
+    @BeforeEach
+    void prepararDatos() throws DatoInvalidoException {
+        alumno = new Alumno(1, "Perez", "Ana", LocalDate.of(2000, 1, 1));
+        asignatura = new Obligatoria("OB1", "Obligatoria", 1, true);
+    }
 
     @Test
-    void sinClasesDictadasDevuelveCero() {
+    void sinClasesDictadasDevuelveCero() throws DatoInvalidoException {
         assertEquals(0, nuevaInscripcion().porcentajeAsistencia(0));
     }
 
     @Test
-    void sinAsistenciasDevuelveCero() {
+    void sinAsistenciasDevuelveCero() throws DatoInvalidoException {
         assertEquals(0, nuevaInscripcion().porcentajeAsistencia(10));
     }
 
@@ -44,11 +49,11 @@ class PorcentajeAsistenciaTest {
         assertEquals(100.0 / 3.0, inscripcion.porcentajeAsistencia(3), 0.0001);
     }
 
-    private Inscripcion nuevaInscripcion() {
+    private Inscripcion nuevaInscripcion() throws DatoInvalidoException {
         return new Inscripcion(alumno, asignatura, Modalidad.REGULAR);
     }
 
-    private Clase clase(String id, int dia) {
+    private Clase clase(String id, int dia) throws DatoInvalidoException {
         return new Clase(id, LocalDateTime.of(2026, 3, dia, 8, 0), asignatura);
     }
 }

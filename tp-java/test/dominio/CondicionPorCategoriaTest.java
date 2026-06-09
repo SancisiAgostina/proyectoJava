@@ -15,9 +15,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CondicionPorCategoriaTest {
 
-    private static final Alumno ALUMNO = new Alumno(
-            1, "Perez", "Ana", LocalDate.of(2000, 1, 1));
-
     @ParameterizedTest(name = "{0}: {2}% => {3}")
     @MethodSource("casosRegulares")
     void calculaCondicionDeAlumnosRegulares(
@@ -47,7 +44,7 @@ class CondicionPorCategoriaTest {
                         .calcularCondicion(100));
     }
 
-    private static Stream<Arguments> casosRegulares() {
+    private static Stream<Arguments> casosRegulares() throws DatoInvalidoException {
         return Stream.of(
                 caso("Obligatoria debajo de habilitar", obligatoria(true), 59, Condicion.LIBRE),
                 caso("Obligatoria habilita", obligatoria(true), 60, Condicion.PUEDE_HABILITAR),
@@ -65,7 +62,7 @@ class CondicionPorCategoriaTest {
         );
     }
 
-    private static Stream<Arguments> casosCondicionales() {
+    private static Stream<Arguments> casosCondicionales() throws DatoInvalidoException {
         return Stream.of(
                 caso("Obligatoria debajo de habilitar", obligatoria(true), 79, Condicion.LIBRE),
                 caso("Obligatoria habilita", obligatoria(true), 80, Condicion.PUEDE_HABILITAR),
@@ -82,7 +79,7 @@ class CondicionPorCategoriaTest {
         );
     }
 
-    private static Stream<Arguments> categorias() {
+    private static Stream<Arguments> categorias() throws DatoInvalidoException {
         return Stream.of(
                 Arguments.of("Obligatoria", obligatoria(true)),
                 Arguments.of("Optativa", optativa(true)),
@@ -96,26 +93,27 @@ class CondicionPorCategoriaTest {
         return Arguments.of(nombre, asignatura, asistencias, esperada);
     }
 
-    private static Asignatura obligatoria(boolean promocional) {
+    private static Asignatura obligatoria(boolean promocional) throws DatoInvalidoException {
         return new Obligatoria("OB1", "Obligatoria", 1, promocional);
     }
 
-    private static Asignatura optativa(boolean promocional) {
+    private static Asignatura optativa(boolean promocional) throws DatoInvalidoException {
         return new Optativa("OP1", "Optativa", 1, promocional);
     }
 
-    private static Asignatura pasantia() {
+    private static Asignatura pasantia() throws DatoInvalidoException {
         return new Pasantia("PA1", "Pasantia", 9, false);
     }
 
-    private static Asignatura trabajoFinal() {
+    private static Asignatura trabajoFinal() throws DatoInvalidoException {
         return new TrabajoFinal("TF1", "Trabajo final", 10, false);
     }
 
     private static Inscripcion inscripcion(
             Asignatura asignatura, Modalidad modalidad, int asistencias)
             throws DatoInvalidoException {
-        Inscripcion inscripcion = new Inscripcion(ALUMNO, asignatura, modalidad);
+        Alumno alumno = new Alumno(1, "Perez", "Ana", LocalDate.of(2000, 1, 1));
+        Inscripcion inscripcion = new Inscripcion(alumno, asignatura, modalidad);
         LocalDateTime inicio = LocalDateTime.of(2026, 3, 1, 8, 0);
 
         for (int i = 0; i < asistencias; i++) {

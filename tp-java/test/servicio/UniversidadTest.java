@@ -95,7 +95,7 @@ class UniversidadTest {
     }
 
     @Test
-    void inscripcionRechazaClaseDeOtraAsignatura() {
+    void inscripcionRechazaClaseDeOtraAsignatura() throws DatoInvalidoException {
         Asignatura optativa = new Optativa("OP1", "Optativa", 1, true);
         Clase claseOptativa = new Clase(
                 "C2", LocalDateTime.of(2026, 3, 2, 8, 0), optativa);
@@ -139,7 +139,7 @@ class UniversidadTest {
     }
 
     @Test
-    void rechazaInscripcionConEntidadesNoRegistradas() {
+    void rechazaInscripcionConEntidadesNoRegistradas() throws DatoInvalidoException {
         Alumno otroAlumno = new Alumno(
                 2000, "Otro", "Alumno", LocalDate.of(2001, 1, 1));
         Asignatura otraAsignatura = new Optativa("OP2", "Otra", 2, true);

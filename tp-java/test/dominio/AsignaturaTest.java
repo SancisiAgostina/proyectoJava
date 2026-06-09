@@ -1,5 +1,6 @@
 package dominio;
 
+import dominio.excepciones.DatoInvalidoException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -22,7 +23,7 @@ class AsignaturaTest {
     }
 
     @Test
-    void obligatoriaYOptativaPermitenPromocion() {
+    void obligatoriaYOptativaPermitenPromocion() throws DatoInvalidoException {
         Asignatura obligatoria = new Obligatoria("OB1", "Obligatoria", 1, true);
         Asignatura optativa = new Optativa("OP1", "Optativa", 1, true);
 
@@ -35,7 +36,7 @@ class AsignaturaTest {
     }
 
     @Test
-    void pasantiaYTrabajoFinalNoPermitenPromocion() {
+    void pasantiaYTrabajoFinalNoPermitenPromocion() throws DatoInvalidoException {
         Asignatura pasantia = new Pasantia("PA1", "Pasantia", 9, false);
         Asignatura trabajoFinal = new TrabajoFinal("TF1", "Trabajo final", 10, false);
 
@@ -55,7 +56,8 @@ class AsignaturaTest {
         assertEquals(75, TrabajoFinal.PORCENTAJE_HABILITAR_REGULAR);
     }
 
-    private static Stream<Arguments> categoriasYPorcentajeHabilitar() {
+    private static Stream<Arguments> categoriasYPorcentajeHabilitar()
+            throws DatoInvalidoException {
         return Stream.of(
                 Arguments.of("Obligatoria",
                         new Obligatoria("OB1", "Obligatoria", 1, true),

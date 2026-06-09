@@ -1,5 +1,6 @@
 package dominio;
 
+import dominio.excepciones.DatoInvalidoException;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -11,7 +12,19 @@ public abstract class Asignatura  implements Serializable{
         private final int cuatrimestre;
         private final boolean promocional;
 
-        public Asignatura(String codigo, String nombre, int cuatrimestre, boolean promocional){
+        protected Asignatura(String codigo, String nombre, int cuatrimestre, boolean promocional)
+                throws DatoInvalidoException {
+            if (codigo == null || codigo.isBlank()) {
+                throw new DatoInvalidoException("El código de la asignatura es obligatorio.");
+            }
+            if (nombre == null || nombre.isBlank()) {
+                throw new DatoInvalidoException("El nombre de la asignatura es obligatorio.");
+            }
+            if (cuatrimestre < 1 || cuatrimestre > 10) {
+                throw new DatoInvalidoException(
+                        "El cuatrimestre debe estar comprendido entre 1 y 10.");
+            }
+
             this.codigo=codigo;
             this.nombre=nombre;
             this.cuatrimestre=cuatrimestre;

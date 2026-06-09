@@ -3,6 +3,7 @@ package dominio;
 import dominio.enums.Condicion;
 import dominio.enums.Modalidad;
 import dominio.excepciones.DatoInvalidoException;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -12,8 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InscripcionTest {
 
-    private final Alumno alumno = new Alumno(
-            1, "Perez", "Ana", LocalDate.of(2000, 1, 1));
+    private Alumno alumno;
+
+    @BeforeEach
+    void prepararAlumno() throws DatoInvalidoException {
+        alumno = new Alumno(1, "Perez", "Ana", LocalDate.of(2000, 1, 1));
+    }
 
     @Test
     void obligatoriaRegularHabilitaCon60PeroPromocionaCon80() throws DatoInvalidoException {
@@ -53,7 +58,7 @@ class InscripcionTest {
 
     @Test
     void pasantiaNuncaPromociona() throws DatoInvalidoException {
-        Asignatura asignatura = new Pasantia("PA1", "Pasantia", 9, true);
+        Asignatura asignatura = new Pasantia("PA1", "Pasantia", 9, false);
 
         assertEquals(Condicion.PUEDE_HABILITAR,
                 inscripcionConAsistencias(asignatura, Modalidad.REGULAR, 4)

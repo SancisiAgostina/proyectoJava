@@ -1,5 +1,6 @@
 package dominio;
 
+import dominio.excepciones.DatoInvalidoException;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -11,7 +12,18 @@ public class Clase implements Serializable {
     private final LocalDateTime fechahora;
     private final Asignatura asignatura;
 
-    public Clase(String id, LocalDateTime fechahora, Asignatura asignatura){
+    public Clase(String id, LocalDateTime fechahora, Asignatura asignatura)
+            throws DatoInvalidoException {
+        if (id == null || id.isBlank()) {
+            throw new DatoInvalidoException("El identificador de la clase es obligatorio.");
+        }
+        if (fechahora == null) {
+            throw new DatoInvalidoException("La fecha y hora de la clase son obligatorias.");
+        }
+        if (asignatura == null) {
+            throw new DatoInvalidoException("La asignatura de la clase es obligatoria.");
+        }
+
         this.id=id;
         this.fechahora=fechahora;
         this.asignatura=asignatura;

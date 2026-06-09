@@ -1,11 +1,13 @@
 package dominio;
 
+import dominio.excepciones.DatoInvalidoException;
+
 public class Obligatoria extends Asignatura{
     private static final long serialVersionUID=1L;
     public static final double PORCENTAJE_HABILITAR_REGULAR = 60;
     public static final double PORCENTAJE_PROMOCIONAR_REGULAR = 80;
 
- public Obligatoria(String c,String n, int cuat, boolean promo){
+ public Obligatoria(String c,String n, int cuat, boolean promo) throws DatoInvalidoException {
      super(c,n,cuat,promo);
  }
     @Override

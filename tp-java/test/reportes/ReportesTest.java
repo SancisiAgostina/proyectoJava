@@ -138,11 +138,13 @@ class ReportesTest {
         assertTrue(Files.readString(libres).contains("Benitez-Beto"));
     }
 
-    private Alumno alumno(int matricula, String apellido, String nombre) {
+    private Alumno alumno(int matricula, String apellido, String nombre)
+            throws DatoInvalidoException {
         return new Alumno(matricula, apellido, nombre, LocalDate.of(2000, 1, 1));
     }
 
-    private Clase clase(String id, int dia, Asignatura asignatura) {
+    private Clase clase(String id, int dia, Asignatura asignatura)
+            throws DatoInvalidoException {
         return new Clase(id, LocalDateTime.of(2026, 3, dia, 8, 0), asignatura);
     }
 }
