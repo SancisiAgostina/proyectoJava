@@ -1,7 +1,6 @@
 package dominio;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -14,10 +13,10 @@ import dominio.excepciones.DatoInvalidoException;
 public class Inscripcion implements Serializable {
     private static final long serialVersionUID=1L;
 
-    private Alumno alumno;
-    private Asignatura asignatura;
-    private Modalidad modalidad;
-    private Set<Clase> clasesAsistidas = new HashSet<>();
+    private final Alumno alumno;
+    private final Asignatura asignatura;
+    private final Modalidad modalidad;
+    private final Set<Clase> clasesAsistidas = new HashSet<>();
 
     public Inscripcion(Alumno alumno, Asignatura asignatura, Modalidad modalidad){
         this.alumno=alumno;
@@ -47,9 +46,15 @@ public class Inscripcion implements Serializable {
     }
 
     public Condicion calcularCondicion(int totalClasesAsignatura){
+        return calcularCondicion(clasesAsistidas.size(), totalClasesAsignatura);
+    }
+
+    public Condicion calcularCondicion(int cantidadPresentes, int totalClasesAsignatura){
         if(modalidad==Modalidad.OYENTE) return Condicion.LIBRE;
 
-        double porcentaje = porcentajeAsistencia(totalClasesAsignatura);
+        double porcentaje = totalClasesAsignatura == 0
+                ? 0
+                : cantidadPresentes * 100.0 / totalClasesAsignatura;
         int ajuste = modalidad.getAjuste();
 
         double umbralHabilitar = asignatura.porcentajeHabilitarRegular() + ajuste;
@@ -70,7 +75,7 @@ public class Inscripcion implements Serializable {
     public Asignatura getAsignatura(){ return asignatura;}
     public Modalidad getModalidad(){ return modalidad;}
     public Set<Clase> getClasesAsistidas(){
-        return Collections.unmodifiableSet(clasesAsistidas);
+        return Set.copyOf(clasesAsistidas);
     }
 
 }

@@ -1,14 +1,15 @@
 package dominio;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public abstract class Asignatura  implements Serializable{
     private static  final long serialVersionUID=1L;
 
-        private String codigo;
-        private String nombre;
-        private int cuatrimestre;
-        private boolean promocional;
+        private final String codigo;
+        private final String nombre;
+        private final int cuatrimestre;
+        private final boolean promocional;
 
         public Asignatura(String codigo, String nombre, int cuatrimestre, boolean promocional){
             this.codigo=codigo;
@@ -35,6 +36,17 @@ public abstract class Asignatura  implements Serializable{
         return codigo +" -" + nombre;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) return true;
+        if (obj instanceof Asignatura asignatura) {
+            return Objects.equals(codigo, asignatura.codigo);
+        }
+        return false;
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigo);
+    }
 }

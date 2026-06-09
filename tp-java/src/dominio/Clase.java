@@ -7,9 +7,9 @@ import java.util.Objects;
 public class Clase implements Serializable {
     public static final long serialVersionUID=1l;
 
-    private String id;
-    private LocalDateTime fechahora;
-    private Asignatura asignatura;
+    private final String id;
+    private final LocalDateTime fechahora;
+    private final Asignatura asignatura;
 
     public Clase(String id, LocalDateTime fechahora, Asignatura asignatura){
         this.id=id;

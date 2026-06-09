@@ -8,10 +8,10 @@ import java.util.Objects;
 public class Alumno implements Serializable, Comparable<Alumno>{
     public static final long serialVersionUID=1L;
 
-    private int matricula;
-    private String apellido;
-    private String nombre;
-    private LocalDate fechaNacimiento;
+    private final int matricula;
+    private final String apellido;
+    private final String nombre;
+    private final LocalDate fechaNacimiento;
 
     public Alumno(int matricula, String apellido, String nombre, LocalDate fechaNacimiento){
         this.matricula=matricula;
@@ -29,11 +29,16 @@ public class Alumno implements Serializable, Comparable<Alumno>{
 
     @Override
     public int compareTo(Alumno otro){
+        if (this.matricula == otro.matricula) return 0;
+
         int cmp = this.apellido.compareTo(otro.apellido);
 
         if(cmp!=0) return cmp;
 
-        return this.nombre.compareTo(otro.nombre);
+        cmp = this.nombre.compareTo(otro.nombre);
+        if(cmp!=0) return cmp;
+
+        return Integer.compare(this.matricula, otro.matricula);
     }
 
     @Override
