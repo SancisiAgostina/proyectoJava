@@ -2,48 +2,51 @@ package persistencia;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
-import dominio.*;
+import dominio.Alumno;
+import dominio.Asignatura;
+import dominio.Clase;
+import dominio.Inscripcion;
+import dominio.Obligatoria;
+import dominio.Optativa;
+import dominio.Pasantia;
+import dominio.TrabajoFinal;
 import dominio.enums.Modalidad;
 import dominio.excepciones.DatoInvalidoException;
-import servicio.Universidad;
 import persistencia.dto.DatosJSON;
-import persistencia.dto.DatosJSON.*;
+import persistencia.dto.DatosJSON.AlumnoDTO;
+import persistencia.dto.DatosJSON.AsignaturaDTO;
+import persistencia.dto.DatosJSON.ClaseDTO;
+import persistencia.dto.DatosJSON.InscripcionDTO;
+import servicio.Universidad;
 
-
-
-
-/**
- *
- * Universidad es la fachada del sistema:
- * la clase central que guarda todos los datos y por la que pasa todo.
- * Cuando alguien (la UI, el cargador, los reportes) necesita trabajar con el sistema, le habla a la Universidad, no a las clases sueltas.
-**/
 public class CargadorJSON extends CargadorDatos {
 
-    // Las agendas son propias del proceso de carga → quedan acá
-    private Map<String, Asignatura> asignaturasPorCodigo = new HashMap<>();
-    private Map<Integer, Alumno> alumnosPorMatricula = new HashMap<>();
+    private final Gson gson = new Gson();
+    private final Map<String, Asignatura> asignaturasPorCodigo = new HashMap<>();
+    private final Map<Integer, Alumno> alumnosPorMatricula = new HashMap<>();
 
-    /**
-     *
-      durante la carga, encontrar al instante el objeto real a partir de su código,
-     para poder enganchar las clases con sus asignaturas y las inscripciones con sus alumnos y asignaturas.
-     Sin las agendas, tendrías que recorrer listas enteras cada vez, que es lento.
-     */
     @Override
     public void cargar(String ruta, Universidad universidad) throws IOException {
+        Objects.requireNonNull(ruta, "La ruta no puede ser nula.");
+        Objects.requireNonNull(universidad, "La universidad no puede ser nula.");
+        reiniciarCarga(universidad);
+
         DatosJSON datos;
-        try (Reader reader = new FileReader(ruta)) {
-            datos = new Gson().fromJson(reader, DatosJSON.class);
+        try (Reader reader = Files.newBufferedReader(Path.of(ruta), StandardCharsets.UTF_8)) {
+            datos = gson.fromJson(reader, DatosJSON.class);
         } catch (JsonSyntaxException e) {
             informe.agregar("JSON mal formado: " + e.getMessage());
             return;
@@ -59,34 +62,45 @@ public class CargadorJSON extends CargadorDatos {
         cargarInscripciones(datos, universidad);
     }
 
+    private void reiniciarCarga(Universidad universidad) {
+        reiniciarInforme();
+        asignaturasPorCodigo.clear();
+        alumnosPorMatricula.clear();
+
+        universidad.getAsignaturas().forEach(
+                asignatura -> asignaturasPorCodigo.put(asignatura.getCodigo(), asignatura));
+        universidad.getAlumnos().forEach(
+                alumno -> alumnosPorMatricula.put(alumno.getMatricula(), alumno));
+    }
+
     private void cargarAsignaturas(DatosJSON datos, Universidad u) {
         if (datos.asignaturas == null) return;
-        for (AsignaturaDTO dto : datos.asignaturas) {
+        for (int indice = 0; indice < datos.asignaturas.size(); indice++) {
+            AsignaturaDTO dto = datos.asignaturas.get(indice);
             try {
-                validarCodigo(dto.codigo);                    // ← heredado de la base
-                validarCuatrimestre(dto.cuatrimestre, dto.codigo); // ← heredado
+                validarRegistro(dto);
+                if (dto.cuatrimestre == null) {
+                    throw new DatoInvalidoException("El cuatrimestre es obligatorio.");
+                }
                 boolean promo = dto.promocional != null && dto.promocional;
 
                 Asignatura asig = crearAsignatura(dto, promo);
 
                 if (asignaturasPorCodigo.containsKey(dto.codigo))
                     throw new DatoInvalidoException("Código duplicado: " + dto.codigo);
-                //Pregunta si ese código ya estaba en la agenda. Si sí, es un duplicado en el archivo → lanza error.
-                asignaturasPorCodigo.put(dto.codigo, asig);
-                //Guarda la asignatura en la agenda (para poder buscarla por código más adelante).
                 u.agregarAsignatura(asig);
-                //Guarda la asignatura en la Universidad (su lugar definitivo, donde el resto del sistema la usa).
+                asignaturasPorCodigo.put(dto.codigo, asig);
             } catch (DatoInvalidoException e) {
-                informe.agregar(e.getMessage());
+                agregarError("asignaturas", indice, e);
             }
         }
     }
 
     private Asignatura crearAsignatura(AsignaturaDTO dto, boolean promo)
             throws DatoInvalidoException {
-        if (dto.categoria == null)
+        if (dto.categoria == null || dto.categoria.isBlank())
             throw new DatoInvalidoException("Falta categoría en " + dto.codigo);
-        switch (dto.categoria.toUpperCase()) {
+        switch (normalizar(dto.categoria)) {
             case "OBLIGATORIA":
                 return new Obligatoria(dto.codigo, dto.nombre, dto.cuatrimestre, promo);
             case "OPTATIVA":
@@ -103,30 +117,33 @@ public class CargadorJSON extends CargadorDatos {
 
     private void cargarAlumnos(DatosJSON datos, Universidad u) {
         if (datos.alumnos == null) return;
-        for (AlumnoDTO dto : datos.alumnos) {
+        for (int indice = 0; indice < datos.alumnos.size(); indice++) {
+            AlumnoDTO dto = datos.alumnos.get(indice);
             try {
-                validarMatricula(dto.matricula);              // ← heredado
-                if (dto.apellido == null || dto.apellido.isBlank())
-                    throw new DatoInvalidoException(
-                            "Alumno " + dto.matricula + " sin apellido.");
+                validarRegistro(dto);
+                if (dto.matricula == null) {
+                    throw new DatoInvalidoException("La matrícula es obligatoria.");
+                }
                 LocalDate fnac = parseFecha(dto.fechaNacimiento, dto.matricula);
 
                 Alumno al = new Alumno(dto.matricula, dto.apellido, dto.nombre, fnac);
                 if (alumnosPorMatricula.containsKey(dto.matricula))
                     throw new DatoInvalidoException("Matrícula duplicada: " + dto.matricula);
 
-                alumnosPorMatricula.put(dto.matricula, al);
                 u.agregarAlumno(al);
+                alumnosPorMatricula.put(dto.matricula, al);
             } catch (DatoInvalidoException e) {
-                informe.agregar(e.getMessage());
+                agregarError("alumnos", indice, e);
             }
         }
     }
 
     private void cargarClases(DatosJSON datos, Universidad u) {
         if (datos.clases == null) return;
-        for (ClaseDTO dto : datos.clases) {
+        for (int indice = 0; indice < datos.clases.size(); indice++) {
+            ClaseDTO dto = datos.clases.get(indice);
             try {
+                validarRegistro(dto);
                 Asignatura asig = asignaturasPorCodigo.get(dto.codigoAsignatura);
                 if (asig == null)
                     throw new DatoInvalidoException(
@@ -135,15 +152,17 @@ public class CargadorJSON extends CargadorDatos {
                 LocalDateTime fh = parseFechaHora(dto.fechaHora, dto.id);
                 u.agregarClase(new Clase(dto.id, fh, asig));
             } catch (DatoInvalidoException e) {
-                informe.agregar(e.getMessage());
+                agregarError("clases", indice, e);
             }
         }
     }
 
     private void cargarInscripciones(DatosJSON datos, Universidad u) {
         if (datos.inscripciones == null) return;
-        for (InscripcionDTO dto : datos.inscripciones) {
+        for (int indice = 0; indice < datos.inscripciones.size(); indice++) {
+            InscripcionDTO dto = datos.inscripciones.get(indice);
             try {
+                validarRegistro(dto);
                 Alumno al = alumnosPorMatricula.get(dto.matriculaAlumno);
                 Asignatura asig = asignaturasPorCodigo.get(dto.codigoAsignatura);
                 if (al == null)
@@ -155,9 +174,19 @@ public class CargadorJSON extends CargadorDatos {
                 Modalidad mod = parseModalidad(dto.modalidad);
                 u.agregarInscripcion(new Inscripcion(al, asig, mod));
             } catch (DatoInvalidoException e) {
-                informe.agregar(e.getMessage());
+                agregarError("inscripciones", indice, e);
             }
         }
+    }
+
+    private void validarRegistro(Object dto) throws DatoInvalidoException {
+        if (dto == null) {
+            throw new DatoInvalidoException("El registro no puede ser nulo.");
+        }
+    }
+
+    private void agregarError(String seccion, int indice, DatoInvalidoException error) {
+        informe.agregar(seccion + "[" + indice + "]: " + error.getMessage());
     }
 
     private LocalDate parseFecha(String s, int matricula) throws DatoInvalidoException {
@@ -178,11 +207,13 @@ public class CargadorJSON extends CargadorDatos {
 
     private Modalidad parseModalidad(String s) throws DatoInvalidoException {
         try {
-            return Modalidad.valueOf(s.toUpperCase());
+            return Modalidad.valueOf(normalizar(s));
         } catch (IllegalArgumentException | NullPointerException e) {
             throw new DatoInvalidoException("Modalidad inválida: " + s);
         }
     }
+
+    private String normalizar(String valor) {
+        return valor.trim().toUpperCase(Locale.ROOT);
+    }
 }
-
-

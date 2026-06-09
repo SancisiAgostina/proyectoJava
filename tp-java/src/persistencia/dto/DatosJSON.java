@@ -1,7 +1,5 @@
 package persistencia.dto;
 
-import dominio.Asignatura;
-
 import java.util.List;
 
 public class DatosJSON {

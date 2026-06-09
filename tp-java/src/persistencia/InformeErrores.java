@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InformeErrores {
-    private List<String> errores = new ArrayList<>();
+    private final List<String> errores = new ArrayList<>();
 
-    public void agregar(String mensaje){errores.add(mensaje);}
+    void agregar(String mensaje){errores.add(mensaje);}
     public boolean hayErrores(){return !errores.isEmpty();}
-    public List<String> getErrores() { return errores;}
+    public int cantidadErrores() { return errores.size(); }
+    public List<String> getErrores() { return List.copyOf(errores);}
 
     @Override
     public String toString(){
