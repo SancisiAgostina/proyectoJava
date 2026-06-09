@@ -50,7 +50,7 @@ public class Inscripcion implements Serializable {
     }
 
     public Condicion calcularCondicion(int cantidadPresentes, int totalClasesAsignatura){
-        if(modalidad==Modalidad.OYENTE) return Condicion.LIBRE;
+        if(!modalidad.permiteAcreditacion()) return Condicion.LIBRE;
 
         double porcentaje = totalClasesAsignatura == 0
                 ? 0
