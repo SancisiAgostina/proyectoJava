@@ -1,0 +1,190 @@
+{
+  "asignaturas": [
+    {
+      "categoria": "OBLIGATORIA",
+      "codigo": "MAT01",
+      "nombre": "Análisis Matemático I",
+      "cuatrimestre": 1,
+      "promocional": true
+    },
+    {
+      "categoria": "OBLIGATORIA",
+      "codigo": "MAT02",
+      "nombre": "Álgebra",
+      "cuatrimestre": 2,
+      "promocional": false
+    },
+    {
+      "categoria": "OPTATIVA",
+      "codigo": "OPT05",
+      "nombre": "Robótica",
+      "cuatrimestre": 5,
+      "promocional": true
+    },
+    {
+      "categoria": "PASANTIA",
+      "codigo": "PAS09",
+      "nombre": "Práctica Profesional",
+      "cuatrimestre": 9,
+      "promocional": false
+    },
+    {
+      "categoria": "TRABAJO_FINAL",
+      "codigo": "TF10",
+      "nombre": "Tesis de Grado",
+      "cuatrimestre": 10,
+      "promocional": false
+    },
+    {
+      "categoria": "MARCIANA",
+      "codigo": "ERR1",
+      "nombre": "Categoría que no existe",
+      "cuatrimestre": 3,
+      "promocional": false
+    },
+    {
+      "categoria": "OBLIGATORIA",
+      "codigo": "ERR2",
+      "nombre": "Cuatrimestre fuera de rango",
+      "cuatrimestre": 99,
+      "promocional": true
+    },
+    {
+      "categoria": "OPTATIVA",
+      "codigo": "",
+      "nombre": "Sin código",
+      "cuatrimestre": 4,
+      "promocional": true
+    },
+    {
+      "categoria": "OBLIGATORIA",
+      "codigo": "MAT01",
+      "nombre": "Código repetido (duplicado de MAT01)",
+      "cuatrimestre": 1,
+      "promocional": true
+    }
+  ],
+  "alumnos": [
+    {
+      "matricula": 1001,
+      "apellido": "García",
+      "nombre": "Ana",
+      "fechaNacimiento": "2002-03-15"
+    },
+    {
+      "matricula": 1002,
+      "apellido": "López",
+      "nombre": "Bruno",
+      "fechaNacimiento": "2001-11-08"
+    },
+    {
+      "matricula": 1003,
+      "apellido": "Acosta",
+      "nombre": "Carla",
+      "fechaNacimiento": "2003-07-22"
+    },
+    {
+      "matricula": 1004,
+      "apellido": "Benítez",
+      "nombre": "Diego",
+      "fechaNacimiento": "2000-01-30"
+    },
+    {
+      "matricula": 1005,
+      "apellido": "Zárate",
+      "nombre": "Elena",
+      "fechaNacimiento": "fecha-mala"
+    },
+    {
+      "matricula": 1006,
+      "apellido": "",
+      "nombre": "Sin Apellido",
+      "fechaNacimiento": "1999-05-10"
+    },
+    {
+      "matricula": 1001,
+      "apellido": "Duplicado",
+      "nombre": "Matrícula repetida de 1001",
+      "fechaNacimiento": "2002-02-02"
+    }
+  ],
+  "clases": [
+    {
+      "id": "C001",
+      "fechaHora": "2026-03-10T08:00",
+      "codigoAsignatura": "MAT01"
+    },
+    {
+      "id": "C002",
+      "fechaHora": "2026-03-12T08:00",
+      "codigoAsignatura": "MAT01"
+    },
+    {
+      "id": "C003",
+      "fechaHora": "2026-03-17T08:00",
+      "codigoAsignatura": "MAT01"
+    },
+    {
+      "id": "C004",
+      "fechaHora": "2026-03-11T10:00",
+      "codigoAsignatura": "OPT05"
+    },
+    {
+      "id": "C005",
+      "fechaHora": "2026-03-13T10:00",
+      "codigoAsignatura": "OPT05"
+    },
+    {
+      "id": "C006",
+      "fechaHora": "fecha-hora-mala",
+      "codigoAsignatura": "MAT02"
+    },
+    {
+      "id": "C007",
+      "fechaHora": "2026-03-14T09:00",
+      "codigoAsignatura": "NOEXISTE"
+    }
+  ],
+  "inscripciones": [
+    {
+      "matriculaAlumno": 1001,
+      "codigoAsignatura": "MAT01",
+      "modalidad": "REGULAR"
+    },
+    {
+      "matriculaAlumno": 1002,
+      "codigoAsignatura": "MAT01",
+      "modalidad": "CONDICIONAL"
+    },
+    {
+      "matriculaAlumno": 1003,
+      "codigoAsignatura": "MAT01",
+      "modalidad": "OYENTE"
+    },
+    {
+      "matriculaAlumno": 1004,
+      "codigoAsignatura": "OPT05",
+      "modalidad": "REGULAR"
+    },
+    {
+      "matriculaAlumno": 1001,
+      "codigoAsignatura": "OPT05",
+      "modalidad": "REGULAR"
+    },
+    {
+      "matriculaAlumno": 9999,
+      "codigoAsignatura": "MAT01",
+      "modalidad": "REGULAR"
+    },
+    {
+      "matriculaAlumno": 1002,
+      "codigoAsignatura": "NOEXISTE",
+      "modalidad": "REGULAR"
+    },
+    {
+      "matriculaAlumno": 1004,
+      "codigoAsignatura": "MAT01",
+      "modalidad": "INVENTADA"
+    }
+  ]
+}

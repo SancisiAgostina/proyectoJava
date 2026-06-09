@@ -1,4 +1,4 @@
-package app;
+/*package app;
 
 import javafx.application.Application;
 
@@ -7,3 +7,4 @@ public class Launcher {
         Application.launch(HelloApplication.class, args);
     }
 }
+*/
