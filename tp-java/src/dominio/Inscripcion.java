@@ -58,10 +58,10 @@ public class Inscripcion implements Serializable {
         int ajuste = modalidad.getAjuste();
 
         double umbralHabilitar = asignatura.porcentajeHabilitarRegular() + ajuste;
-        double umbralPromocionar = asignatura.porcentajePromocionarRegular();
 
-        if(umbralPromocionar >= 0 && asignatura.esPromocional()){
-            umbralPromocionar += ajuste;
+        if(asignatura.permitePromocion() && asignatura.esPromocional()){
+            double umbralPromocionar =
+                    asignatura.porcentajePromocionarRegular() + ajuste;
             if(porcentaje >= umbralPromocionar) return Condicion.PUEDE_PROMOCIONAR;
         }
 

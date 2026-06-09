@@ -20,7 +20,12 @@ public abstract class Asignatura  implements Serializable{
 
     //devuelve el porcentaje mínimo de asistencia que un alumno regular necesita para quedar en condiciones de habilitar esa asignatura (o sea, poder rendir el final).
     public abstract  double porcentajeHabilitarRegular();
-    public abstract double porcentajePromocionarRegular();
+    public abstract boolean permitePromocion();
+
+    public double porcentajePromocionarRegular() {
+        throw new IllegalStateException(
+                "La categoría de asignatura no permite promoción.");
+    }
 
     //devuelve el porcentaje mínimo de asistencia que un alumno regular necesita para quedar en condiciones de promocionar (aprobar sin final).
 

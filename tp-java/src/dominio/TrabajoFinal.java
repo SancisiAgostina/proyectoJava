@@ -2,10 +2,19 @@ package dominio;
 
 public class TrabajoFinal extends Asignatura{
     private static final long serialVersionUID=1l;
+    public static final double PORCENTAJE_HABILITAR_REGULAR = 75;
 
     public TrabajoFinal(String c, String n, int cuat, boolean promo) {
         super(c, n, cuat, promo);
     }
-    public double porcentajeHabilitarRegular()    { return 75; }
-    public double porcentajePromocionarRegular()  { return -1; }
+
+    @Override
+    public double porcentajeHabilitarRegular() {
+        return PORCENTAJE_HABILITAR_REGULAR;
+    }
+
+    @Override
+    public boolean permitePromocion() {
+        return false;
+    }
 }
