@@ -84,7 +84,7 @@
                     <execution>
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>tpjava/app.HelloApplication</mainClass>
+                            <mainClass>app.Launcher</mainClass>
                             <launcher>app</launcher>
                             <options>
                                 <option>--enable-native-access=javafx.graphics</option>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<?import javafx.scene.control.Button?>
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="interfaces.menu_asistencias.ControladorMenuAsistencia"
+    stylesheets="@../styles.css">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+    <Label text="Menu de Asistencias"/>
+
+    <Label text="Selecciona una materia:"/>
+    <StackPane>
+        <children>
+            <ComboBox fx:id="comboBoxMaterias" prefWidth="400.0" promptText="Selecciona una materia..." />
+        </children>
+    </StackPane>
+
+    <Label text="Selecciona una clase:"/>
+    <StackPane>
+        <children>
+            <ComboBox fx:id="comboBoxClases" prefWidth="400.0" promptText="Selecciona una clase..." />
+        </children>
+    </StackPane>
+
+    <Label text="Selecciona un estudiante:"/>
+    <StackPane>
+        <children>
+            <ComboBox fx:id="comboBoxEstudiantes" prefWidth="400.0" promptText="Selecciona un estudiante..." />
+        </children>
+    </StackPane>
+
+    <Label fx:id="labelMensaje" style="-fx-font-size: 14px; -fx-font-weight: bold;" visible="false"/>
+
+    <HBox spacing="10.0" alignment="CENTER" maxWidth="Infinity">
+        <Button text="Registrar Asistencia" onAction="#sobreRegistrarAsistencia"/>
+        <Button text="Volver" onAction="#sobreVolver"/>
+    </HBox>
+</VBox>

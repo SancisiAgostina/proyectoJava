@@ -1,0 +1,91 @@
+.root {
+    -fx-background-color: #121212;
+}
+
+.button {
+    -fx-background-color: #006e6c;
+    -fx-text-fill: white;
+    -fx-pref-width: 200px;
+    -fx-pref-height: 40px;
+    -fx-background-radius: 6px;
+    -fx-font-weight: bold;
+}
+
+.button:hover {
+    -fx-background-color: #008f8c;
+}
+
+.button:pressed {
+    -fx-background-color: #004d4b;
+}
+
+.label {
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+}
+
+.table-view {
+    -fx-background-color: #003433;
+    -fx-table-cell-border-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-text-fill: white;
+    -fx-background-radius: 12px;
+}
+
+.table-column {
+    -fx-background-color: #000b0b;
+    -fx-text-fill: white;
+    -fx-padding: 5px;
+}
+
+.columns .column-header {
+    -fx-background-color: #000b0b;
+    -fx-border-color: transparent;
+    -fx-text-fill: white;
+}
+
+/* Estilos para StackPane y ComboBox */
+.stack-pane {
+    -fx-background-color: transparent;
+}
+
+.combo-box {
+    -fx-background-color: #003433;
+    -fx-background-radius: 6px;
+    -fx-border-color: #006e6c;
+    -fx-border-radius: 6px;
+    -fx-border-width: 1px;
+}
+
+.combo-box > .list-cell {
+    -fx-text-fill: #e0e0e0;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.combo-box .arrow {
+    -fx-background-color: white;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #121212;
+    -fx-background-radius: 6px;
+    -fx-border-color: #006e6c;
+    -fx-border-radius: 6px;
+    -fx-border-width: 1px;
+}
+
+.combo-box-popup .list-cell {
+    -fx-text-fill: white;
+    -fx-background-color: transparent;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #006e6c;
+}
+
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: #003433;
+}
