@@ -172,7 +172,19 @@ public class CargadorJSON extends CargadorDatos {
                     throw new DatoInvalidoException(
                             "Inscripción a asignatura inexistente: " + dto.codigoAsignatura);
                 Modalidad mod = parseModalidad(dto.modalidad);
-                u.agregarInscripcion(new Inscripcion(al, asig, mod));
+                Inscripcion insc = new Inscripcion(al, asig, mod);
+                if (dto.clasesAsistidas != null) {
+                    for (String idClase : dto.clasesAsistidas) {
+                        Clase clase = u.getClases().stream()
+                                .filter(c -> c.getId().equals(idClase))
+                                .findFirst()
+                                .orElse(null);
+                        if (clase != null) {
+                            insc.registrarAsistencia(clase);
+                        }
+                    }
+                }
+                u.agregarInscripcion(insc);
             } catch (DatoInvalidoException e) {
                 agregarError("inscripciones", indice, e);
             }

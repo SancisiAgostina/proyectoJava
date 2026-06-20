@@ -34,49 +34,9 @@
       "nombre": "Tesis de Grado",
       "cuatrimestre": 10,
       "promocional": false
-    },
-    {
-      "categoria": "MARCIANA",
-      "codigo": "ERR1",
-      "nombre": "Categoría que no existe",
-      "cuatrimestre": 3,
-      "promocional": false
-    },
-    {
-      "categoria": "OBLIGATORIA",
-      "codigo": "ERR2",
-      "nombre": "Cuatrimestre fuera de rango",
-      "cuatrimestre": 99,
-      "promocional": true
-    },
-    {
-      "categoria": "OPTATIVA",
-      "codigo": "",
-      "nombre": "Sin código",
-      "cuatrimestre": 4,
-      "promocional": true
-    },
-    {
-      "categoria": "OBLIGATORIA",
-      "codigo": "MAT01",
-      "nombre": "Código repetido (duplicado de MAT01)",
-      "cuatrimestre": 1,
-      "promocional": true
     }
   ],
   "alumnos": [
-    {
-      "matricula": 1001,
-      "apellido": "García",
-      "nombre": "Ana",
-      "fechaNacimiento": "2002-03-15"
-    },
-    {
-      "matricula": 1002,
-      "apellido": "López",
-      "nombre": "Bruno",
-      "fechaNacimiento": "2001-11-08"
-    },
     {
       "matricula": 1003,
       "apellido": "Acosta",
@@ -90,22 +50,16 @@
       "fechaNacimiento": "2000-01-30"
     },
     {
-      "matricula": 1005,
-      "apellido": "Zárate",
-      "nombre": "Elena",
-      "fechaNacimiento": "fecha-mala"
-    },
-    {
-      "matricula": 1006,
-      "apellido": "",
-      "nombre": "Sin Apellido",
-      "fechaNacimiento": "1999-05-10"
-    },
-    {
       "matricula": 1001,
-      "apellido": "Duplicado",
-      "nombre": "Matrícula repetida de 1001",
-      "fechaNacimiento": "2002-02-02"
+      "apellido": "García",
+      "nombre": "Ana",
+      "fechaNacimiento": "2002-03-15"
+    },
+    {
+      "matricula": 1002,
+      "apellido": "López",
+      "nombre": "Bruno",
+      "fechaNacimiento": "2001-11-08"
     }
   ],
   "clases": [
@@ -133,58 +87,45 @@
       "id": "C005",
       "fechaHora": "2026-03-13T10:00",
       "codigoAsignatura": "OPT05"
-    },
-    {
-      "id": "C006",
-      "fechaHora": "fecha-hora-mala",
-      "codigoAsignatura": "MAT02"
-    },
-    {
-      "id": "C007",
-      "fechaHora": "2026-03-14T09:00",
-      "codigoAsignatura": "NOEXISTE"
     }
   ],
   "inscripciones": [
     {
       "matriculaAlumno": 1001,
       "codigoAsignatura": "MAT01",
-      "modalidad": "REGULAR"
+      "modalidad": "REGULAR",
+      "clasesAsistidas": [
+        "C002"
+      ]
     },
     {
       "matriculaAlumno": 1002,
       "codigoAsignatura": "MAT01",
-      "modalidad": "CONDICIONAL"
+      "modalidad": "CONDICIONAL",
+      "clasesAsistidas": [
+        "C002"
+      ]
     },
     {
       "matriculaAlumno": 1003,
       "codigoAsignatura": "MAT01",
-      "modalidad": "OYENTE"
+      "modalidad": "OYENTE",
+      "clasesAsistidas": [
+        "C001",
+        "C002"
+      ]
     },
     {
       "matriculaAlumno": 1004,
       "codigoAsignatura": "OPT05",
-      "modalidad": "REGULAR"
+      "modalidad": "REGULAR",
+      "clasesAsistidas": []
     },
     {
       "matriculaAlumno": 1001,
       "codigoAsignatura": "OPT05",
-      "modalidad": "REGULAR"
-    },
-    {
-      "matriculaAlumno": 9999,
-      "codigoAsignatura": "MAT01",
-      "modalidad": "REGULAR"
-    },
-    {
-      "matriculaAlumno": 1002,
-      "codigoAsignatura": "NOEXISTE",
-      "modalidad": "REGULAR"
-    },
-    {
-      "matriculaAlumno": 1004,
-      "codigoAsignatura": "MAT01",
-      "modalidad": "INVENTADA"
+      "modalidad": "REGULAR",
+      "clasesAsistidas": []
     }
   ]
 }

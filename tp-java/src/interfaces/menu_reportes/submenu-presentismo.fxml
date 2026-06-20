@@ -19,7 +19,7 @@
     <HBox spacing="10.0" alignment="CENTER" maxWidth="Infinity">
         <StackPane alignment="CENTER" prefWidth="320.0" maxWidth="Infinity">
             <children>
-                <ComboBox fx:id="comboBoxAnios" editable="true" promptText="Selecciona o escribe un año..." />
+                <ComboBox fx:id="comboBoxAnios" promptText="Selecciona un año..." />
             </children>
         </StackPane>
         <Button text="Por año Especifico" onAction="#sobreBotonReportePresentismo"/>

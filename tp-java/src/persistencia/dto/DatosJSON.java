@@ -34,7 +34,7 @@ public class DatosJSON {
         public Integer matriculaAlumno;
         public String codigoAsignatura;
         public String modalidad;
-
+        public List<String> clasesAsistidas;
     }
 
 
