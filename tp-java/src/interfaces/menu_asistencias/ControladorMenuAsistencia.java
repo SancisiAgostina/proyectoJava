@@ -15,6 +15,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * Controlador que se encarga de registrar asistencias de los alumnos a clases.
+ * Aplicando los diferentes filtros respectivamente a materias, alumnos e clases
+ * para que se muestren los correspondientes.
+ * Muestra mensajes en caso de ya haber indicado la asistencia.
+ */
+
 public class ControladorMenuAsistencia {
 
 	@FXML

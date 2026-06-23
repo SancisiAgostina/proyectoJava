@@ -5,32 +5,37 @@ import dominio.Asignatura;
 import dominio.Clase;
 import dominio.Inscripcion;
 import dominio.excepciones.DatoInvalidoException;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+
+/**
+ * Clase que representa la universidad.
+ * Contiene los alumnos, asignaturas, clases e inscripciones.
+ * Permite agregar y obtener cada una de las entidades.
+ */
 
 public class Universidad implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final TreeSet<Alumno> alumnos = new TreeSet<>();
-    private final List<Asignatura> asignaturas = new ArrayList<>();
-    private final List<Clase> clases = new ArrayList<>();
+    private final Set<Asignatura> asignaturas = new HashSet<>();
+    private final Set<Clase> clases = new HashSet<>();
     private final List<Inscripcion> inscripciones = new ArrayList<>();
 
     public void agregarAlumno(Alumno alumno) throws DatoInvalidoException {
         if (alumno == null) {
             throw new DatoInvalidoException("El alumno no puede ser nulo.");
         }
-        if (alumnos.stream().anyMatch(a -> a.getMatricula() == alumno.getMatricula())) {
-            throw new DatoInvalidoException(
-                    "Ya existe un alumno con matrícula " + alumno.getMatricula() + ".");
+        if (!alumnos.add(alumno)) {
+            throw new DatoInvalidoException("Ya existe un alumno con matrícula " + alumno.getMatricula() + ".");
         }
-        alumnos.add(alumno);
     }
 
     public void agregarAsignatura(Asignatura asignatura) throws DatoInvalidoException {
@@ -40,12 +45,10 @@ public class Universidad implements Serializable {
         if (asignatura.getCodigo() == null || asignatura.getCodigo().isBlank()) {
             throw new DatoInvalidoException("La asignatura debe tener un código.");
         }
-        if (asignaturas.stream().anyMatch(a -> Objects.equals(
-                a.getCodigo(), asignatura.getCodigo()))) {
+        if (!asignaturas.add(asignatura)) {
             throw new DatoInvalidoException(
                     "Ya existe una asignatura con código " + asignatura.getCodigo() + ".");
         }
-        asignaturas.add(asignatura);
     }
 
     public void agregarClase(Clase clase) throws DatoInvalidoException {
@@ -59,11 +62,10 @@ public class Universidad implements Serializable {
             throw new DatoInvalidoException(
                     "La clase debe corresponder a una asignatura registrada.");
         }
-        if (clases.stream().anyMatch(c -> Objects.equals(c.getId(), clase.getId()))) {
+        if (!clases.add(clase)) {
             throw new DatoInvalidoException(
                     "Ya existe una clase con identificador " + clase.getId() + ".");
         }
-        clases.add(clase);
     }
 
     public void agregarInscripcion(Inscripcion inscripcion) throws DatoInvalidoException {
@@ -82,17 +84,15 @@ public class Universidad implements Serializable {
         if (inscripcion.getModalidad() == null) {
             throw new DatoInvalidoException("La inscripción debe tener una modalidad.");
         }
-        if (inscripciones.stream().anyMatch(i ->
-                i.getAlumno().equals(inscripcion.getAlumno())
-                        && i.getAsignatura().equals(inscripcion.getAsignatura()))) {
+        if (inscripciones.stream().anyMatch(i -> i.getAlumno().equals(inscripcion.getAlumno())
+                && i.getAsignatura().equals(inscripcion.getAsignatura()))) {
             throw new DatoInvalidoException(
                     "El alumno ya está inscripto en la asignatura.");
         }
         inscripciones.add(inscripcion);
     }
 
-    public void registrarAsistencia(int matriculaAlumno, String idClase)
-            throws DatoInvalidoException {
+    public void registrarAsistencia(int matriculaAlumno, String idClase) throws DatoInvalidoException {
         if (idClase == null || idClase.isBlank()) {
             throw new DatoInvalidoException("Debe indicar el identificador de la clase.");
         }

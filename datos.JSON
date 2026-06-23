@@ -1,17 +1,10 @@
 {
   "asignaturas": [
     {
-      "categoria": "OBLIGATORIA",
-      "codigo": "MAT01",
-      "nombre": "Análisis Matemático I",
-      "cuatrimestre": 1,
-      "promocional": true
-    },
-    {
-      "categoria": "OBLIGATORIA",
-      "codigo": "MAT02",
-      "nombre": "Álgebra",
-      "cuatrimestre": 2,
+      "categoria": "TRABAJO_FINAL",
+      "codigo": "TF10",
+      "nombre": "Tesis de Grado",
+      "cuatrimestre": 10,
       "promocional": false
     },
     {
@@ -22,17 +15,24 @@
       "promocional": true
     },
     {
+      "categoria": "OBLIGATORIA",
+      "codigo": "MAT02",
+      "nombre": "Álgebra",
+      "cuatrimestre": 2,
+      "promocional": false
+    },
+    {
+      "categoria": "OBLIGATORIA",
+      "codigo": "MAT01",
+      "nombre": "Análisis Matemático I",
+      "cuatrimestre": 1,
+      "promocional": true
+    },
+    {
       "categoria": "PASANTIA",
       "codigo": "PAS09",
       "nombre": "Práctica Profesional",
       "cuatrimestre": 9,
-      "promocional": false
-    },
-    {
-      "categoria": "TRABAJO_FINAL",
-      "codigo": "TF10",
-      "nombre": "Tesis de Grado",
-      "cuatrimestre": 10,
       "promocional": false
     }
   ],
@@ -64,8 +64,8 @@
   ],
   "clases": [
     {
-      "id": "C001",
-      "fechaHora": "2026-03-10T08:00",
+      "id": "C003",
+      "fechaHora": "2026-03-17T08:00",
       "codigoAsignatura": "MAT01"
     },
     {
@@ -74,18 +74,18 @@
       "codigoAsignatura": "MAT01"
     },
     {
-      "id": "C003",
-      "fechaHora": "2026-03-17T08:00",
+      "id": "C001",
+      "fechaHora": "2026-03-10T08:00",
       "codigoAsignatura": "MAT01"
-    },
-    {
-      "id": "C004",
-      "fechaHora": "2026-03-11T10:00",
-      "codigoAsignatura": "OPT05"
     },
     {
       "id": "C005",
       "fechaHora": "2026-03-13T10:00",
+      "codigoAsignatura": "OPT05"
+    },
+    {
+      "id": "C004",
+      "fechaHora": "2026-03-11T10:00",
       "codigoAsignatura": "OPT05"
     }
   ],
@@ -95,7 +95,8 @@
       "codigoAsignatura": "MAT01",
       "modalidad": "REGULAR",
       "clasesAsistidas": [
-        "C002"
+        "C002",
+        "C003"
       ]
     },
     {
@@ -103,7 +104,9 @@
       "codigoAsignatura": "MAT01",
       "modalidad": "CONDICIONAL",
       "clasesAsistidas": [
-        "C002"
+        "C002",
+        "C003",
+        "C001"
       ]
     },
     {
@@ -111,8 +114,9 @@
       "codigoAsignatura": "MAT01",
       "modalidad": "OYENTE",
       "clasesAsistidas": [
-        "C001",
-        "C002"
+        "C002",
+        "C003",
+        "C001"
       ]
     },
     {

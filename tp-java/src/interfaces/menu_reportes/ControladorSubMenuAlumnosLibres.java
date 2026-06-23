@@ -13,6 +13,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * Controlador que se encarga de generar el reporte de alumnos libres.
+ * Aplica filtros por año de carrera y permite ver todos los alumnos libres.
+ * Y lo envia al ControladorReportes para que se muestre en la tabla genérica
+ * y permite su descarga como .txt a partir del ExportadorTexto.java.
+ */
+
 public class ControladorSubMenuAlumnosLibres {
 
     // Inyectamos el ComboBox definido en el FXML

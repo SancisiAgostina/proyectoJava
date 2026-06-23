@@ -8,10 +8,15 @@ import dominio.enums.Modalidad;
 import dominio.enums.Condicion;
 import dominio.excepciones.DatoInvalidoException;
 
-//Inscripcion — la clase clave. Une alumno + asignatura + modalidad, y guarda a qué clases asistió. Acá vive el cálculo de condición (polimórfico):
+/**
+ * Clase Inscripcion. Une alumno + asignatura + modalidad.
+ * Guarda las clases a las que asistió.
+ * Aca se encuentra el calculo de condicion (polimórfico).
+ * Se hacen las verificaciones pertinentes para que los datos sean validos.
+ */
 
 public class Inscripcion implements Serializable {
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
 
     private final Alumno alumno;
     private final Asignatura asignatura;
@@ -30,11 +35,10 @@ public class Inscripcion implements Serializable {
             throw new DatoInvalidoException("La modalidad de la inscripción es obligatoria.");
         }
 
-        this.alumno=alumno;
-        this.asignatura=asignatura;
-        this.modalidad=modalidad;
+        this.alumno = alumno;
+        this.asignatura = asignatura;
+        this.modalidad = modalidad;
     }
-
 
     public void registrarAsistencia(Clase clase) throws DatoInvalidoException {
         if (clase == null) {
@@ -51,17 +55,19 @@ public class Inscripcion implements Serializable {
         }
     }
 
-    public double porcentajeAsistencia(int totalClasesAsignatura){
-        if(totalClasesAsignatura == 0) return 0;
-        return (clasesAsistidas.size()*100.0)/totalClasesAsignatura;
+    public double porcentajeAsistencia(int totalClasesAsignatura) {
+        if (totalClasesAsignatura == 0)
+            return 0;
+        return (clasesAsistidas.size() * 100.0) / totalClasesAsignatura;
     }
 
-    public Condicion calcularCondicion(int totalClasesAsignatura){
+    public Condicion calcularCondicion(int totalClasesAsignatura) {
         return calcularCondicion(clasesAsistidas.size(), totalClasesAsignatura);
     }
 
-    public Condicion calcularCondicion(int cantidadPresentes, int totalClasesAsignatura){
-        if(!modalidad.permiteAcreditacion()) return Condicion.LIBRE;
+    public Condicion calcularCondicion(int cantidadPresentes, int totalClasesAsignatura) {
+        if (!modalidad.permiteAcreditacion())
+            return Condicion.LIBRE;
 
         double porcentaje = totalClasesAsignatura == 0
                 ? 0
@@ -70,22 +76,31 @@ public class Inscripcion implements Serializable {
 
         double umbralHabilitar = asignatura.porcentajeHabilitarRegular() + ajuste;
 
-        if(asignatura.permitePromocion() && asignatura.esPromocional()){
-            double umbralPromocionar =
-                    asignatura.porcentajePromocionarRegular() + ajuste;
-            if(porcentaje >= umbralPromocionar) return Condicion.PUEDE_PROMOCIONAR;
+        if (asignatura.permitePromocion() && asignatura.esPromocional()) {
+            double umbralPromocionar = asignatura.porcentajePromocionarRegular() + ajuste;
+            if (porcentaje >= umbralPromocionar)
+                return Condicion.PUEDE_PROMOCIONAR;
         }
 
-        if(porcentaje >= umbralHabilitar) return Condicion.PUEDE_HABILITAR;
+        if (porcentaje >= umbralHabilitar)
+            return Condicion.PUEDE_HABILITAR;
 
         return Condicion.LIBRE;
     }
 
+    public Alumno getAlumno() {
+        return alumno;
+    }
 
-    public Alumno  getAlumno(){return alumno;}
-    public Asignatura getAsignatura(){ return asignatura;}
-    public Modalidad getModalidad(){ return modalidad;}
-    public Set<Clase> getClasesAsistidas(){
+    public Asignatura getAsignatura() {
+        return asignatura;
+    }
+
+    public Modalidad getModalidad() {
+        return modalidad;
+    }
+
+    public Set<Clase> getClasesAsistidas() {
         return Set.copyOf(clasesAsistidas);
     }
 

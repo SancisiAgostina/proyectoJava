@@ -5,8 +5,16 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Representa una clase de una asignatura.
+ * Tiene un identificador, una fecha y hora y una asignatura.
+ * Tiene un metodo toString para mostrar la informacion de la clase.
+ * Tiene un metodo equals para comparar si dos clases son iguales.
+ * Tiene un metodo hashCode para obtener el hash code de la clase.
+ */
+
 public class Clase implements Serializable {
-    public static final long serialVersionUID=1l;
+    public static final long serialVersionUID = 1l;
 
     private final String id;
     private final LocalDateTime fechahora;
@@ -24,34 +32,40 @@ public class Clase implements Serializable {
             throw new DatoInvalidoException("La asignatura de la clase es obligatoria.");
         }
 
-        this.id=id;
-        this.fechahora=fechahora;
-        this.asignatura=asignatura;
+        this.id = id;
+        this.fechahora = fechahora;
+        this.asignatura = asignatura;
     }
 
-    public String getId(){return id;}
-    public LocalDateTime getFechahora(){ return fechahora;}
-    public Asignatura getAsignatura(){ return asignatura;}
+    public String getId() {
+        return id;
+    }
 
+    public LocalDateTime getFechahora() {
+        return fechahora;
+    }
 
-
-    @Override
-    public String toString(){
-        return "Clase " + id + " - " +fechahora;
+    public Asignatura getAsignatura() {
+        return asignatura;
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(obj==this)
+    public String toString() {
+        return "Clase " + id + " - " + fechahora;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this)
             return true;
-        if(obj instanceof Clase s)
+        if (obj instanceof Clase s)
             return id.equals(s.id);
 
         return false;
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return Objects.hash(id);
     }
 

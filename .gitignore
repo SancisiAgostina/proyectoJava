@@ -1,0 +1,8 @@
+# Ignorar carpetas de Javadoc y temporales en la raíz
+javaDoc/
+doc/
+*.bak
+*.JSON.bak
+datos.json.bak
+tp-java/target/
+tp-java/doc/

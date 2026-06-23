@@ -2,13 +2,22 @@ package persistencia.dto;
 
 import java.util.List;
 
+/**
+ * Clase que define la estructura de datos utilizada para la persistencia y
+ * recuperación
+ * de información de la Universidad en formato JSON. Agrupa en un único
+ * contenedor
+ * todos los objetos de transferencia de datos (DTO) necesarios para representar
+ * el estado del sistema.
+ */
+
 public class DatosJSON {
     public List<AsignaturaDTO> asignaturas;
     public List<AlumnoDTO> alumnos;
     public List<ClaseDTO> clases;
     public List<InscripcionDTO> inscripciones;
 
-    public static class AsignaturaDTO{
+    public static class AsignaturaDTO {
         public String categoria;
         public String codigo;
         public String nombre;
@@ -17,29 +26,24 @@ public class DatosJSON {
 
     }
 
-    public static class AlumnoDTO{
+    public static class AlumnoDTO {
         public Integer matricula;
         public String apellido;
         public String nombre;
         public String fechaNacimiento;
     }
 
-    public static class ClaseDTO{
+    public static class ClaseDTO {
         public String id;
         public String fechaHora;
         public String codigoAsignatura;
     }
 
-    public static class InscripcionDTO{
+    public static class InscripcionDTO {
         public Integer matriculaAlumno;
         public String codigoAsignatura;
         public String modalidad;
         public List<String> clasesAsistidas;
     }
-
-
-
-
-
 
 }

@@ -26,14 +26,22 @@ import persistencia.dto.DatosJSON.ClaseDTO;
 import persistencia.dto.DatosJSON.InscripcionDTO;
 import servicio.Universidad;
 
+/**
+ * Clase encargada de serializar y deserializar el estado de la Universidad en
+ * formato JSON.
+ * Mapea los objetos del dominio del negocio a objetos de transferencia de datos
+ * (DTO)
+ * para su almacenamiento persistente, gestionando además la creación de
+ * respaldos (.bak).
+ */
+
 public class Serializador {
 
     private final Gson gson = new GsonBuilder().setPrettyPrinting().serializeNulls().create();
 
-    /** Guarda el estado completo del sistema en un archivo JSON. Crea un backup si ya existe. */
     public void guardar(Universidad universidad, String ruta) throws IOException {
         Path destino = Path.of(ruta);
-        
+
         // 1. Crear backup si el archivo destino existe
         if (Files.exists(destino)) {
             Path backup = Path.of(ruta + ".bak");
@@ -62,7 +70,7 @@ public class Serializador {
             dto.nombre = asig.getNombre();
             dto.cuatrimestre = asig.getCuatrimestre();
             dto.promocional = asig.esPromocional();
-            
+
             if (asig instanceof Obligatoria) {
                 dto.categoria = "OBLIGATORIA";
             } else if (asig instanceof Optativa) {
@@ -90,7 +98,7 @@ public class Serializador {
             dto.matriculaAlumno = insc.getAlumno() != null ? insc.getAlumno().getMatricula() : null;
             dto.codigoAsignatura = insc.getAsignatura() != null ? insc.getAsignatura().getCodigo() : null;
             dto.modalidad = insc.getModalidad() != null ? insc.getModalidad().name() : null;
-            
+
             dto.clasesAsistidas = new ArrayList<>();
             for (Clase claseAsistida : insc.getClasesAsistidas()) {
                 dto.clasesAsistidas.add(claseAsistida.getId());
@@ -106,7 +114,7 @@ public class Serializador {
 
     private InformeErrores ultimoInforme;
 
-    /** Recupera el estado del sistema desde un archivo JSON. */
+    // Recupera el estado del sistema desde un archivo JSON.
     public Universidad cargar(String ruta) throws IOException, ClassNotFoundException {
         Universidad universidad = new Universidad();
         CargadorJSON cargador = new CargadorJSON();

@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-
 import dominio.Alumno;
 import dominio.Asignatura;
 import dominio.Clase;
@@ -31,6 +30,12 @@ import persistencia.dto.DatosJSON.AsignaturaDTO;
 import persistencia.dto.DatosJSON.ClaseDTO;
 import persistencia.dto.DatosJSON.InscripcionDTO;
 import servicio.Universidad;
+
+/**
+ * Implementación de CargadorDatos encargada de cargar, procesar y validar
+ * la información de la Universidad a partir de un archivo estructurado en
+ * formato JSON.
+ */
 
 public class CargadorJSON extends CargadorDatos {
 
@@ -74,7 +79,8 @@ public class CargadorJSON extends CargadorDatos {
     }
 
     private void cargarAsignaturas(DatosJSON datos, Universidad u) {
-        if (datos.asignaturas == null) return;
+        if (datos.asignaturas == null)
+            return;
         for (int indice = 0; indice < datos.asignaturas.size(); indice++) {
             AsignaturaDTO dto = datos.asignaturas.get(indice);
             try {
@@ -116,7 +122,8 @@ public class CargadorJSON extends CargadorDatos {
     }
 
     private void cargarAlumnos(DatosJSON datos, Universidad u) {
-        if (datos.alumnos == null) return;
+        if (datos.alumnos == null)
+            return;
         for (int indice = 0; indice < datos.alumnos.size(); indice++) {
             AlumnoDTO dto = datos.alumnos.get(indice);
             try {
@@ -139,7 +146,8 @@ public class CargadorJSON extends CargadorDatos {
     }
 
     private void cargarClases(DatosJSON datos, Universidad u) {
-        if (datos.clases == null) return;
+        if (datos.clases == null)
+            return;
         for (int indice = 0; indice < datos.clases.size(); indice++) {
             ClaseDTO dto = datos.clases.get(indice);
             try {
@@ -158,7 +166,8 @@ public class CargadorJSON extends CargadorDatos {
     }
 
     private void cargarInscripciones(DatosJSON datos, Universidad u) {
-        if (datos.inscripciones == null) return;
+        if (datos.inscripciones == null)
+            return;
         for (int indice = 0; indice < datos.inscripciones.size(); indice++) {
             InscripcionDTO dto = datos.inscripciones.get(indice);
             try {

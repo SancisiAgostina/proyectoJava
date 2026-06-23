@@ -1,13 +1,22 @@
 package dominio;
 
-
 import dominio.excepciones.DatoInvalidoException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
-//Te estás comprometiendo a escribir el metodo compareTo
-public class Alumno implements Serializable, Comparable<Alumno>{
-    public static final long serialVersionUID=1L;
+
+/**
+ * Clase que representa a un alumno.
+ * Un alumno tiene una matrícula, un apellido, un nombre y una fecha de
+ * nacimiento.
+ * Se utiliza la matrícula como clave primaria para la identificación de
+ * alumnos.
+ * Se hacen las verificacion pertitnentes para que los datos sean validos.
+ * Contiene un metodo para comparar los alumnos.
+ */
+
+public class Alumno implements Serializable, Comparable<Alumno> {
+    public static final long serialVersionUID = 1L;
 
     private final int matricula;
     private final String apellido;
@@ -32,50 +41,62 @@ public class Alumno implements Serializable, Comparable<Alumno>{
             throw new DatoInvalidoException("La fecha de nacimiento no puede ser futura.");
         }
 
-        this.matricula=matricula;
-        this.apellido=apellido;
-        this.nombre=nombre;
-        this.fechaNacimiento=fechaNacimiento;
+        this.matricula = matricula;
+        this.apellido = apellido;
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
+    public int getMatricula() {
+        return matricula;
+    }
 
-    public int getMatricula(){return matricula;}
-    public String getApellido(){return apellido;}
-    public String getNombre(){return nombre;}
-    public LocalDate getFechaNacimiento() {return fechaNacimiento;}
+    public String getApellido() {
+        return apellido;
+    }
 
+    public String getNombre() {
+        return nombre;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
 
     @Override
-    public int compareTo(Alumno otro){
-        if (this.matricula == otro.matricula) return 0;
+    public int compareTo(Alumno otro) {
+        if (this.matricula == otro.matricula)
+            return 0;
 
         int cmp = this.apellido.compareTo(otro.apellido);
 
-        if(cmp!=0) return cmp;
+        if (cmp != 0)
+            return cmp;
 
         cmp = this.nombre.compareTo(otro.nombre);
-        if(cmp!=0) return cmp;
+        if (cmp != 0)
+            return cmp;
 
         return Integer.compare(this.matricula, otro.matricula);
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return apellido + "-" + nombre + " (" + matricula + ")";
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(obj==this)
+    public boolean equals(Object obj) {
+        if (obj == this)
             return true;
-        if(obj instanceof Alumno a)
-            return matricula==a.matricula;
+        if (obj instanceof Alumno a)
+            return matricula == a.matricula;
 
         return false;
     }
 
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return Objects.hash(matricula);
     }
 

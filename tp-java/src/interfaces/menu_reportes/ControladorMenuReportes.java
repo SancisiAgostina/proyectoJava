@@ -11,6 +11,15 @@ import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 import interfaces.reportes.ControladorReportes;
 
+/**
+ * Controlador que se encarga de manejar el menu de reportes.
+ * Muestra los diferentes reportes disponibles.
+ * Envia el TreeItem del reporte de presentismo y permite su descarga como .txt
+ * a partir del ExportadorTexto.java o lleva al usario a otro submenu segun la
+ * opcion
+ * elegida.
+ */
+
 public class ControladorMenuReportes {
 
 	@FXML
@@ -20,10 +29,19 @@ public class ControladorMenuReportes {
 			reportes.ReportePresentismo reporte = new reportes.ReportePresentismo(app.Launcher.getUniversidad());
 			List<reportes.ReportePresentismo.ItemPresentismo> items = reporte.generar();
 
-			// Convertir a filas DTO para TableView
-			List<FilaReportePresentismo> filas = java.util.stream.IntStream.range(0, items.size())
-					.mapToObj(i -> new FilaReportePresentismo(i + 1, items.get(i)))
-					.toList();
+			javafx.scene.control.TreeItem<FilaReportePresentismo> raiz = new javafx.scene.control.TreeItem<>();
+
+			for (int i = 0; i < items.size(); i++) {
+				reportes.ReportePresentismo.ItemPresentismo item = items.get(i);
+				javafx.scene.control.TreeItem<FilaReportePresentismo> nodoAsignatura = new javafx.scene.control.TreeItem<>(
+						new FilaReportePresentismo(i + 1, item));
+
+				for (reportes.ReportePresentismo.ItemPresentismoClase detalle : item.detalleClases()) {
+					nodoAsignatura.getChildren()
+							.add(new javafx.scene.control.TreeItem<>(new FilaReportePresentismo(detalle)));
+				}
+				raiz.getChildren().add(nodoAsignatura);
+			}
 
 			// Cargar la vista de reportes
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/interfaces/reportes/reportes.fxml"));
@@ -32,12 +50,11 @@ public class ControladorMenuReportes {
 			// Configurar la tabla de reportes
 			ControladorReportes controladorTabla = fxmlLoader.getController();
 			controladorTabla.configurarPantalla(
-				"Ranking de Presentismo - Todas las Asignaturas",
-				new String[]{"puesto", "codigo", "nombre", "clases", "alumnos", "porcentaje"},
-				new String[]{"Puesto", "Código", "Asignatura", "Clases", "Alumnos", "% Presentismo"},
-				filas,
-				ruta -> reporte.exportar(ruta)
-			);
+					"Ranking de Presentismo - Entre las Asignaturas",
+					new String[] { "puesto", "codigo", "nombre", "clases", "alumnos", "porcentaje" },
+					new String[] { "Puesto", "Código", "Asignatura", "Clases", "Alumnos", "% Presentismo" },
+					raiz,
+					ruta -> reporte.exportar(ruta));
 
 			// Cambiar de pantalla
 			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -129,27 +146,55 @@ public class ControladorMenuReportes {
 	}
 
 	public static class FilaReportePresentismo {
-		private final int puesto;
+		private final String puesto;
 		private final String codigo;
 		private final String nombre;
-		private final int clases;
-		private final int alumnos;
+		private final String clases;
+		private final String alumnos;
 		private final String porcentaje;
 
 		public FilaReportePresentismo(int puesto, reportes.ReportePresentismo.ItemPresentismo item) {
-			this.puesto = puesto;
+			this.puesto = String.valueOf(puesto);
 			this.codigo = item.asignatura().getCodigo();
 			this.nombre = item.asignatura().getNombre();
-			this.clases = item.cantidadClases();
-			this.alumnos = item.cantidadInscriptos();
+			this.clases = String.valueOf(item.cantidadClases());
+			this.alumnos = String.valueOf(item.cantidadInscriptos());
 			this.porcentaje = String.format("%.2f%%", item.porcentaje());
 		}
 
-		public int getPuesto() { return puesto; }
-		public String getCodigo() { return codigo; }
-		public String getNombre() { return nombre; }
-		public int getClases() { return clases; }
-		public int getAlumnos() { return alumnos; }
-		public String getPorcentaje() { return porcentaje; }
+		public FilaReportePresentismo(reportes.ReportePresentismo.ItemPresentismoClase item) {
+			this.puesto = "";
+			this.codigo = item.clase().getId();
+			java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter
+					.ofPattern("dd/MM/yyyy HH:mm");
+			this.nombre = item.clase().getFechahora().format(formatter);
+			this.clases = "";
+			this.alumnos = item.asistenciasRegistradas() + " / " + item.cantidadInscriptos();
+			this.porcentaje = String.format("%.2f%%", item.porcentaje());
+		}
+
+		public String getPuesto() {
+			return puesto;
+		}
+
+		public String getCodigo() {
+			return codigo;
+		}
+
+		public String getNombre() {
+			return nombre;
+		}
+
+		public String getClases() {
+			return clases;
+		}
+
+		public String getAlumnos() {
+			return alumnos;
+		}
+
+		public String getPorcentaje() {
+			return porcentaje;
+		}
 	}
 }

@@ -7,15 +7,18 @@ import dominio.Inscripcion;
 import dominio.enums.Modalidad;
 import dominio.excepciones.DatoInvalidoException;
 import servicio.Universidad;
-
-import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
-
 import static dominio.enums.Condicion.LIBRE;
+
+/**
+ * Clase que se encarga de generar el reporte de alumnos libres.
+ * Filtra los alumnos por año de carrera y permite ver todos los alumnos libres.
+ * Los datos se los pasa al ControladorReportes para que se muestren en la tabla
+ * genérica.
+ */
 
 public class ReporteAlumnosLibres {
 
@@ -52,12 +55,11 @@ public class ReporteAlumnosLibres {
         System.out.print(generarTextoPorAnio(anio));
     }
 
-    public void exportarTodos(Path ruta) throws IOException {
+    public void exportarTodos(java.nio.file.Path ruta) throws java.io.IOException {
         ExportadorTexto.exportar(generarTextoTodos(), ruta);
     }
 
-    public void exportarPorAnio(int anio, Path ruta)
-            throws IOException, DatoInvalidoException {
+    public void exportarPorAnio(int anio, java.nio.file.Path ruta) throws java.io.IOException, DatoInvalidoException {
         ExportadorTexto.exportar(generarTextoPorAnio(anio), ruta);
     }
 

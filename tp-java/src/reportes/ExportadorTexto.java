@@ -5,6 +5,10 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/*
+ * Esta clase se encarga de exportar el reporte a un archivo de texto.
+ */
+
 final class ExportadorTexto {
 
     private ExportadorTexto() {

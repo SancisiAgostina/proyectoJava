@@ -37,3 +37,8 @@ build/
 
 ### Mac OS ###
 .DS_Store
+doc/
+javaDoc/
+*.bak
+*.JSON.bak
+datos.json.bak

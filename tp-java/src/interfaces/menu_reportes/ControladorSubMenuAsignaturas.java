@@ -2,7 +2,6 @@ package interfaces.menu_reportes;
 
 import java.io.IOException;
 import java.util.List;
-
 import interfaces.reportes.ControladorReportes;
 import reportes.ReporteDatosAsignatura;
 import reportes.ReporteDatosAsignatura.DetalleAlumno;
@@ -15,6 +14,13 @@ import javafx.scene.Parent;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+
+/**
+ * Controlador que se encarga de generar el reporte de asignaturas.
+ * Filtra las asignaturas por codigo y nombre.
+ * Envia al ControladorReportes para que se muestre en la tabla genérica
+ * y permite su descarga como .txt a partir del ExportadorTexto.java.
+ */
 
 public class ControladorSubMenuAsignaturas {
 
@@ -64,15 +70,17 @@ public class ControladorSubMenuAsignaturas {
                     .map(detalle -> new FilaReporteAsignatura(detalle, datos.clases().size()))
                     .toList();
 
-            String tituloReporte = "Reporte de Asignatura: " + datos.asignatura().getNombre() + " (" + datos.asignatura().getCodigo() + ")";
+            String tituloReporte = "Reporte de Asignatura: " + datos.asignatura().getNombre() + " ("
+                    + datos.asignatura().getCodigo() + ")";
 
             controladorTabla.configurarPantalla(
-                tituloReporte,
-                new String[]{"legajo", "nombreCompleto", "modalidad", "asistencia", "porcentajeAsistencia", "condicion"},
-                new String[]{"Legajo", "Nombre Completo", "Modalidad", "Asistencias", "% Asistencia", "Condición"},
-                filas,
-                ruta -> reporte.exportar(asignaturaSeleccionada.getCodigo(), ruta)
-            );
+                    tituloReporte,
+                    new String[] { "legajo", "nombreCompleto", "modalidad", "asistencia", "porcentajeAsistencia",
+                            "condicion" },
+                    new String[] { "Legajo", "Nombre Completo", "Modalidad", "Asistencias", "% Asistencia",
+                            "Condición" },
+                    filas,
+                    ruta -> reporte.exportar(asignaturaSeleccionada.getCodigo(), ruta));
 
             // Cambiar de pantalla
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -113,11 +121,28 @@ public class ControladorSubMenuAsignaturas {
             this.condicion = detalle.condicion().toString();
         }
 
-        public String getLegajo() { return legajo; }
-        public String getNombreCompleto() { return nombreCompleto; }
-        public String getModalidad() { return modalidad; }
-        public String getAsistencia() { return asistencia; }
-        public String getPorcentajeAsistencia() { return porcentajeAsistencia; }
-        public String getCondicion() { return condicion; }
+        public String getLegajo() {
+            return legajo;
+        }
+
+        public String getNombreCompleto() {
+            return nombreCompleto;
+        }
+
+        public String getModalidad() {
+            return modalidad;
+        }
+
+        public String getAsistencia() {
+            return asistencia;
+        }
+
+        public String getPorcentajeAsistencia() {
+            return porcentajeAsistencia;
+        }
+
+        public String getCondicion() {
+            return condicion;
+        }
     }
 }
