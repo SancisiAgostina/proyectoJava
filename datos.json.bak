@@ -95,8 +95,8 @@
       "codigoAsignatura": "MAT01",
       "modalidad": "REGULAR",
       "clasesAsistidas": [
-        "C003",
-        "C002"
+        "C002",
+        "C003"
       ]
     },
     {
@@ -104,8 +104,8 @@
       "codigoAsignatura": "MAT01",
       "modalidad": "CONDICIONAL",
       "clasesAsistidas": [
-        "C003",
         "C002",
+        "C003",
         "C001"
       ]
     },
@@ -114,8 +114,8 @@
       "codigoAsignatura": "MAT01",
       "modalidad": "OYENTE",
       "clasesAsistidas": [
-        "C003",
         "C002",
+        "C003",
         "C001"
       ]
     },
