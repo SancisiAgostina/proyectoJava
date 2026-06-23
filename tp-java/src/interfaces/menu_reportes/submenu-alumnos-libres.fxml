@@ -15,9 +15,9 @@
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
     <Label text="Menu de Reportes de Alumnos Libres"/>
-    <StackPane alignment="CENTER" prefWidth="320.0" maxWidth="Infinity">
+    <StackPane alignment="CENTER" prefWidth="350.0" maxWidth="Infinity">
         <children>
-            <ComboBox fx:id="comboBoxAnios" editable="true" promptText="Selecciona o escribe un año..." />
+            <ComboBox fx:id="comboBoxAnios" promptText="Seleccione un año..." prefWidth="300.0"/>
         </children>
     </StackPane>
     <Label fx:id="labelMensaje" style="-fx-font-size: 14px; -fx-font-weight: bold;" visible="false"/>
