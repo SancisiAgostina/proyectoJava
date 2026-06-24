@@ -2,6 +2,7 @@ package interfaces.menu_reportes;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 import interfaces.reportes.ControladorReportes;
 import reportes.ReporteDatosAsignatura;
 import reportes.ReporteDatosAsignatura.DetalleAlumno;
@@ -34,7 +35,7 @@ public class ControladorSubMenuAsignaturas {
     public void initialize() {
         try {
             // Cargar las asignaturas en el combobox
-            List<Asignatura> asignaturas = app.Launcher.getUniversidad().getAsignaturas();
+            Set<Asignatura> asignaturas = app.Launcher.getUniversidad().getAsignaturas();
             comboBoxAsignaturas.getItems().addAll(asignaturas);
             labelMensaje.setVisible(false);
         } catch (Exception e) {

@@ -125,12 +125,12 @@ public class Universidad implements Serializable {
         return Collections.unmodifiableSortedSet(new TreeSet<>(alumnos));
     }
 
-    public List<Asignatura> getAsignaturas() {
-        return List.copyOf(asignaturas);
+    public Set<Asignatura> getAsignaturas() {
+        return Collections.unmodifiableSet(asignaturas);
     }
 
-    public List<Clase> getClases() {
-        return List.copyOf(clases);
+    public Set<Clase> getClases() {
+        return Collections.unmodifiableSet(clases);
     }
 
     public List<Inscripcion> getInscripciones() {
