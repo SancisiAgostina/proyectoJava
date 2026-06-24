@@ -2,6 +2,20 @@
   "asignaturas": [
     {
       "categoria": "OBLIGATORIA",
+      "codigo": "MAT01",
+      "nombre": "Análisis Matemático I",
+      "cuatrimestre": 1,
+      "promocional": true
+    },
+    {
+      "categoria": "OBLIGATORIA",
+      "codigo": "MAT02",
+      "nombre": "Álgebra",
+      "cuatrimestre": 2,
+      "promocional": false
+    },
+    {
+      "categoria": "OBLIGATORIA",
       "codigo": "PROG03",
       "nombre": "Programación I",
       "cuatrimestre": 3,
@@ -15,11 +29,11 @@
       "promocional": false
     },
     {
-      "categoria": "OBLIGATORIA",
-      "codigo": "IS08",
-      "nombre": "Ingeniería de Software",
-      "cuatrimestre": 8,
-      "promocional": false
+      "categoria": "OPTATIVA",
+      "codigo": "OPT05",
+      "nombre": "Robótica",
+      "cuatrimestre": 5,
+      "promocional": true
     },
     {
       "categoria": "OPTATIVA",
@@ -34,6 +48,20 @@
       "nombre": "Bases de Datos II",
       "cuatrimestre": 7,
       "promocional": true
+    },
+    {
+      "categoria": "OBLIGATORIA",
+      "codigo": "IS08",
+      "nombre": "Ingeniería de Software",
+      "cuatrimestre": 8,
+      "promocional": false
+    },
+    {
+      "categoria": "PASANTIA",
+      "codigo": "PAS09",
+      "nombre": "Práctica Profesional",
+      "cuatrimestre": 9,
+      "promocional": false
     },
     {
       "categoria": "TRABAJO_FINAL",
@@ -51,27 +79,80 @@
     },
     {
       "categoria": "OBLIGATORIA",
-      "codigo": "MAT02",
-      "nombre": "Álgebra",
-      "cuatrimestre": 2,
+      "codigo": "ERR_ASIG_01",
+      "nombre": "Materia sin cuatrimestre",
       "promocional": false
     },
     {
       "categoria": "OBLIGATORIA",
       "codigo": "MAT01",
-      "nombre": "Análisis Matemático I",
+      "nombre": "Materia con código duplicado",
       "cuatrimestre": 1,
+      "promocional": false
+    },
+    {
+      "categoria": "",
+      "codigo": "ERR_ASIG_03",
+      "nombre": "Materia sin categoría",
+      "cuatrimestre": 1,
+      "promocional": false
+    },
+    {
+      "categoria": "NUEVA_CATEGORIA_DESCONOCIDA",
+      "codigo": "ERR_ASIG_04",
+      "nombre": "Materia con categoría desconocida",
+      "cuatrimestre": 1,
+      "promocional": false
+    },
+    {
+      "categoria": "TRABAJO_FINAL",
+      "codigo": "ERR_ASIG_05",
+      "nombre": "Trabajo Final Promocional",
+      "cuatrimestre": 10,
       "promocional": true
     },
     {
       "categoria": "PASANTIA",
-      "codigo": "PAS09",
-      "nombre": "Práctica Profesional",
+      "codigo": "ERR_ASIG_06",
+      "nombre": "Pasantía Promocional",
       "cuatrimestre": 9,
+      "promocional": true
+    },
+    {
+      "categoria": "OBLIGATORIA",
+      "codigo": "   ",
+      "nombre": "Materia con código blanco",
+      "cuatrimestre": 1,
+      "promocional": false
+    },
+    {
+      "categoria": "OBLIGATORIA",
+      "codigo": "ERR_ASIG_08",
+      "nombre": "   ",
+      "cuatrimestre": 1,
+      "promocional": false
+    },
+    {
+      "categoria": "OBLIGATORIA",
+      "codigo": "ERR_ASIG_09",
+      "nombre": "Materia cuatrimestre inválido",
+      "cuatrimestre": 11,
       "promocional": false
     }
   ],
   "alumnos": [
+    {
+      "matricula": 1001,
+      "apellido": "García",
+      "nombre": "Ana",
+      "fechaNacimiento": "2002-03-15"
+    },
+    {
+      "matricula": 1002,
+      "apellido": "López",
+      "nombre": "Bruno",
+      "fechaNacimiento": "2001-11-08"
+    },
     {
       "matricula": 1003,
       "apellido": "Acosta",
@@ -85,16 +166,16 @@
       "fechaNacimiento": "2000-01-30"
     },
     {
+      "matricula": 1005,
+      "apellido": "Martínez",
+      "nombre": "Elena",
+      "fechaNacimiento": "2004-05-12"
+    },
+    {
       "matricula": 1006,
       "apellido": "Fernández",
       "nombre": "Gabriel",
       "fechaNacimiento": "2001-04-20"
-    },
-    {
-      "matricula": 1001,
-      "apellido": "García",
-      "nombre": "Ana",
-      "fechaNacimiento": "2002-03-15"
     },
     {
       "matricula": 1007,
@@ -133,18 +214,6 @@
       "fechaNacimiento": "2003-08-25"
     },
     {
-      "matricula": 1002,
-      "apellido": "López",
-      "nombre": "Bruno",
-      "fechaNacimiento": "2001-11-08"
-    },
-    {
-      "matricula": 1005,
-      "apellido": "Martínez",
-      "nombre": "Elena",
-      "fechaNacimiento": "2004-05-12"
-    },
-    {
       "matricula": 1013,
       "apellido": "Muñoz",
       "nombre": "Néstor",
@@ -161,77 +230,63 @@
       "apellido": "Ortega",
       "nombre": "Pablo",
       "fechaNacimiento": "2002-11-22"
+    },
+    {
+      "apellido": "Gómez",
+      "nombre": "Juan",
+      "fechaNacimiento": "2000-05-15"
+    },
+    {
+      "matricula": 0,
+      "apellido": "Pérez",
+      "nombre": "Luis",
+      "fechaNacimiento": "2001-08-20"
+    },
+    {
+      "matricula": 1001,
+      "apellido": "Sánchez",
+      "nombre": "María",
+      "fechaNacimiento": "2002-12-10"
+    },
+    {
+      "matricula": 2003,
+      "apellido": "   ",
+      "nombre": "Pedro",
+      "fechaNacimiento": "2003-01-01"
+    },
+    {
+      "matricula": 2004,
+      "apellido": "González",
+      "nombre": "   ",
+      "fechaNacimiento": "2003-01-01"
+    },
+    {
+      "matricula": 2005,
+      "apellido": "Rodríguez",
+      "nombre": "José",
+      "fechaNacimiento": "fecha-invalida"
+    },
+    {
+      "matricula": 2006,
+      "apellido": "Fernández",
+      "nombre": "Lucía",
+      "fechaNacimiento": "2027-12-31"
     }
   ],
   "clases": [
     {
-      "id": "C039",
-      "fechaHora": "2026-04-16T08:00",
-      "codigoAsignatura": "IS08"
+      "id": "C002",
+      "fechaHora": "2026-03-10T08:00",
+      "codigoAsignatura": "MAT01"
     },
     {
-      "id": "C038",
-      "fechaHora": "2026-04-15T08:00",
-      "codigoAsignatura": "IS08"
+      "id": "C003",
+      "fechaHora": "2026-03-11T08:00",
+      "codigoAsignatura": "MAT01"
     },
     {
-      "id": "C037",
-      "fechaHora": "2026-04-14T08:00",
-      "codigoAsignatura": "IS08"
-    },
-    {
-      "id": "C036",
-      "fechaHora": "2026-04-13T08:00",
-      "codigoAsignatura": "BD07"
-    },
-    {
-      "id": "C035",
-      "fechaHora": "2026-04-12T08:00",
-      "codigoAsignatura": "BD07"
-    },
-    {
-      "id": "C034",
-      "fechaHora": "2026-04-11T08:00",
-      "codigoAsignatura": "BD07"
-    },
-    {
-      "id": "C033",
-      "fechaHora": "2026-04-10T08:00",
-      "codigoAsignatura": "BD07"
-    },
-    {
-      "id": "C032",
-      "fechaHora": "2026-04-09T08:00",
-      "codigoAsignatura": "BD07"
-    },
-    {
-      "id": "C031",
-      "fechaHora": "2026-04-08T08:00",
-      "codigoAsignatura": "OPT06"
-    },
-    {
-      "id": "C030",
-      "fechaHora": "2026-04-07T08:00",
-      "codigoAsignatura": "OPT06"
-    },
-    {
-      "id": "C009",
-      "fechaHora": "2026-03-17T08:00",
-      "codigoAsignatura": "MAT02"
-    },
-    {
-      "id": "C008",
-      "fechaHora": "2026-03-16T08:00",
-      "codigoAsignatura": "MAT02"
-    },
-    {
-      "id": "C007",
-      "fechaHora": "2026-03-15T08:00",
-      "codigoAsignatura": "MAT02"
-    },
-    {
-      "id": "C006",
-      "fechaHora": "2026-03-14T08:00",
+      "id": "C004",
+      "fechaHora": "2026-03-12T08:00",
       "codigoAsignatura": "MAT01"
     },
     {
@@ -240,113 +295,23 @@
       "codigoAsignatura": "MAT01"
     },
     {
-      "id": "C049",
-      "fechaHora": "2026-04-26T08:00",
-      "codigoAsignatura": "TF10"
-    },
-    {
-      "id": "C004",
-      "fechaHora": "2026-03-12T08:00",
+      "id": "C006",
+      "fechaHora": "2026-03-14T08:00",
       "codigoAsignatura": "MAT01"
     },
     {
-      "id": "C048",
-      "fechaHora": "2026-04-25T08:00",
-      "codigoAsignatura": "TF10"
+      "id": "C007",
+      "fechaHora": "2026-03-15T08:00",
+      "codigoAsignatura": "MAT02"
     },
     {
-      "id": "C003",
-      "fechaHora": "2026-03-11T08:00",
-      "codigoAsignatura": "MAT01"
+      "id": "C008",
+      "fechaHora": "2026-03-16T08:00",
+      "codigoAsignatura": "MAT02"
     },
     {
-      "id": "C047",
-      "fechaHora": "2026-04-24T08:00",
-      "codigoAsignatura": "TF10"
-    },
-    {
-      "id": "C002",
-      "fechaHora": "2026-03-10T08:00",
-      "codigoAsignatura": "MAT01"
-    },
-    {
-      "id": "C046",
-      "fechaHora": "2026-04-23T08:00",
-      "codigoAsignatura": "PAS09"
-    },
-    {
-      "id": "C045",
-      "fechaHora": "2026-04-22T08:00",
-      "codigoAsignatura": "PAS09"
-    },
-    {
-      "id": "C044",
-      "fechaHora": "2026-04-21T08:00",
-      "codigoAsignatura": "PAS09"
-    },
-    {
-      "id": "C043",
-      "fechaHora": "2026-04-20T08:00",
-      "codigoAsignatura": "PAS09"
-    },
-    {
-      "id": "C042",
-      "fechaHora": "2026-04-19T08:00",
-      "codigoAsignatura": "PAS09"
-    },
-    {
-      "id": "C041",
-      "fechaHora": "2026-04-18T08:00",
-      "codigoAsignatura": "IS08"
-    },
-    {
-      "id": "C040",
-      "fechaHora": "2026-04-17T08:00",
-      "codigoAsignatura": "IS08"
-    },
-    {
-      "id": "C019",
-      "fechaHora": "2026-03-27T08:00",
-      "codigoAsignatura": "ED04"
-    },
-    {
-      "id": "C018",
-      "fechaHora": "2026-03-26T08:00",
-      "codigoAsignatura": "ED04"
-    },
-    {
-      "id": "C017",
-      "fechaHora": "2026-03-25T08:00",
-      "codigoAsignatura": "ED04"
-    },
-    {
-      "id": "C016",
-      "fechaHora": "2026-03-24T08:00",
-      "codigoAsignatura": "PROG03"
-    },
-    {
-      "id": "C015",
-      "fechaHora": "2026-03-23T08:00",
-      "codigoAsignatura": "PROG03"
-    },
-    {
-      "id": "C014",
-      "fechaHora": "2026-03-22T08:00",
-      "codigoAsignatura": "PROG03"
-    },
-    {
-      "id": "C013",
-      "fechaHora": "2026-03-21T08:00",
-      "codigoAsignatura": "PROG03"
-    },
-    {
-      "id": "C012",
-      "fechaHora": "2026-03-20T08:00",
-      "codigoAsignatura": "PROG03"
-    },
-    {
-      "id": "C011",
-      "fechaHora": "2026-03-19T08:00",
+      "id": "C009",
+      "fechaHora": "2026-03-17T08:00",
       "codigoAsignatura": "MAT02"
     },
     {
@@ -355,43 +320,63 @@
       "codigoAsignatura": "MAT02"
     },
     {
-      "id": "C051",
-      "fechaHora": "2026-04-28T08:00",
-      "codigoAsignatura": "TF10"
+      "id": "C011",
+      "fechaHora": "2026-03-19T08:00",
+      "codigoAsignatura": "MAT02"
     },
     {
-      "id": "C050",
-      "fechaHora": "2026-04-27T08:00",
-      "codigoAsignatura": "TF10"
+      "id": "C012",
+      "fechaHora": "2026-03-20T08:00",
+      "codigoAsignatura": "PROG03"
     },
     {
-      "id": "C029",
-      "fechaHora": "2026-04-06T08:00",
-      "codigoAsignatura": "OPT06"
+      "id": "C013",
+      "fechaHora": "2026-03-21T08:00",
+      "codigoAsignatura": "PROG03"
     },
     {
-      "id": "C028",
-      "fechaHora": "2026-04-05T08:00",
-      "codigoAsignatura": "OPT06"
+      "id": "C014",
+      "fechaHora": "2026-03-22T08:00",
+      "codigoAsignatura": "PROG03"
     },
     {
-      "id": "C027",
-      "fechaHora": "2026-04-04T08:00",
-      "codigoAsignatura": "OPT06"
+      "id": "C015",
+      "fechaHora": "2026-03-23T08:00",
+      "codigoAsignatura": "PROG03"
     },
     {
-      "id": "C026",
-      "fechaHora": "2026-04-03T08:00",
-      "codigoAsignatura": "OPT05"
+      "id": "C016",
+      "fechaHora": "2026-03-24T08:00",
+      "codigoAsignatura": "PROG03"
     },
     {
-      "id": "C025",
-      "fechaHora": "2026-04-02T08:00",
-      "codigoAsignatura": "OPT05"
+      "id": "C017",
+      "fechaHora": "2026-03-25T08:00",
+      "codigoAsignatura": "ED04"
     },
     {
-      "id": "C024",
-      "fechaHora": "2026-04-01T08:00",
+      "id": "C018",
+      "fechaHora": "2026-03-26T08:00",
+      "codigoAsignatura": "ED04"
+    },
+    {
+      "id": "C019",
+      "fechaHora": "2026-03-27T08:00",
+      "codigoAsignatura": "ED04"
+    },
+    {
+      "id": "C020",
+      "fechaHora": "2026-03-28T08:00",
+      "codigoAsignatura": "ED04"
+    },
+    {
+      "id": "C021",
+      "fechaHora": "2026-03-29T08:00",
+      "codigoAsignatura": "ED04"
+    },
+    {
+      "id": "C022",
+      "fechaHora": "2026-03-30T08:00",
       "codigoAsignatura": "OPT05"
     },
     {
@@ -400,22 +385,191 @@
       "codigoAsignatura": "OPT05"
     },
     {
-      "id": "C022",
-      "fechaHora": "2026-03-30T08:00",
+      "id": "C024",
+      "fechaHora": "2026-04-01T08:00",
       "codigoAsignatura": "OPT05"
     },
     {
-      "id": "C021",
-      "fechaHora": "2026-03-29T08:00",
-      "codigoAsignatura": "ED04"
+      "id": "C025",
+      "fechaHora": "2026-04-02T08:00",
+      "codigoAsignatura": "OPT05"
     },
     {
-      "id": "C020",
-      "fechaHora": "2026-03-28T08:00",
-      "codigoAsignatura": "ED04"
+      "id": "C026",
+      "fechaHora": "2026-04-03T08:00",
+      "codigoAsignatura": "OPT05"
+    },
+    {
+      "id": "C027",
+      "fechaHora": "2026-04-04T08:00",
+      "codigoAsignatura": "OPT06"
+    },
+    {
+      "id": "C028",
+      "fechaHora": "2026-04-05T08:00",
+      "codigoAsignatura": "OPT06"
+    },
+    {
+      "id": "C029",
+      "fechaHora": "2026-04-06T08:00",
+      "codigoAsignatura": "OPT06"
+    },
+    {
+      "id": "C030",
+      "fechaHora": "2026-04-07T08:00",
+      "codigoAsignatura": "OPT06"
+    },
+    {
+      "id": "C031",
+      "fechaHora": "2026-04-08T08:00",
+      "codigoAsignatura": "OPT06"
+    },
+    {
+      "id": "C032",
+      "fechaHora": "2026-04-09T08:00",
+      "codigoAsignatura": "BD07"
+    },
+    {
+      "id": "C033",
+      "fechaHora": "2026-04-10T08:00",
+      "codigoAsignatura": "BD07"
+    },
+    {
+      "id": "C034",
+      "fechaHora": "2026-04-11T08:00",
+      "codigoAsignatura": "BD07"
+    },
+    {
+      "id": "C035",
+      "fechaHora": "2026-04-12T08:00",
+      "codigoAsignatura": "BD07"
+    },
+    {
+      "id": "C036",
+      "fechaHora": "2026-04-13T08:00",
+      "codigoAsignatura": "BD07"
+    },
+    {
+      "id": "C037",
+      "fechaHora": "2026-04-14T08:00",
+      "codigoAsignatura": "IS08"
+    },
+    {
+      "id": "C038",
+      "fechaHora": "2026-04-15T08:00",
+      "codigoAsignatura": "IS08"
+    },
+    {
+      "id": "C039",
+      "fechaHora": "2026-04-16T08:00",
+      "codigoAsignatura": "IS08"
+    },
+    {
+      "id": "C040",
+      "fechaHora": "2026-04-17T08:00",
+      "codigoAsignatura": "IS08"
+    },
+    {
+      "id": "C041",
+      "fechaHora": "2026-04-18T08:00",
+      "codigoAsignatura": "IS08"
+    },
+    {
+      "id": "C042",
+      "fechaHora": "2026-04-19T08:00",
+      "codigoAsignatura": "PAS09"
+    },
+    {
+      "id": "C043",
+      "fechaHora": "2026-04-20T08:00",
+      "codigoAsignatura": "PAS09"
+    },
+    {
+      "id": "C044",
+      "fechaHora": "2026-04-21T08:00",
+      "codigoAsignatura": "PAS09"
+    },
+    {
+      "id": "C045",
+      "fechaHora": "2026-04-22T08:00",
+      "codigoAsignatura": "PAS09"
+    },
+    {
+      "id": "C046",
+      "fechaHora": "2026-04-23T08:00",
+      "codigoAsignatura": "PAS09"
+    },
+    {
+      "id": "C047",
+      "fechaHora": "2026-04-24T08:00",
+      "codigoAsignatura": "TF10"
+    },
+    {
+      "id": "C048",
+      "fechaHora": "2026-04-25T08:00",
+      "codigoAsignatura": "TF10"
+    },
+    {
+      "id": "C049",
+      "fechaHora": "2026-04-26T08:00",
+      "codigoAsignatura": "TF10"
+    },
+    {
+      "id": "C050",
+      "fechaHora": "2026-04-27T08:00",
+      "codigoAsignatura": "TF10"
+    },
+    {
+      "id": "C051",
+      "fechaHora": "2026-04-28T08:00",
+      "codigoAsignatura": "TF10"
+    },
+    {
+      "id": "   ",
+      "fechaHora": "2026-03-10T08:00",
+      "codigoAsignatura": "MAT01"
+    },
+    {
+      "id": "C_ERR_18",
+      "fechaHora": "fecha-hora-invalida",
+      "codigoAsignatura": "MAT01"
+    },
+    {
+      "id": "C_ERR_19",
+      "fechaHora": "2026-03-10T08:00",
+      "codigoAsignatura": "NO_EXISTE"
     }
   ],
   "inscripciones": [
+    {
+      "matriculaAlumno": 1001,
+      "codigoAsignatura": "MAT01",
+      "modalidad": "REGULAR",
+      "clasesAsistidas": [
+        "C002",
+        "C012",
+        "C005"
+      ]
+    },
+    {
+      "matriculaAlumno": 1002,
+      "codigoAsignatura": "MAT01",
+      "modalidad": "REGULAR",
+      "clasesAsistidas": [
+        "C003",
+        "C013",
+        "C006"
+      ]
+    },
+    {
+      "matriculaAlumno": 1003,
+      "codigoAsignatura": "MAT01",
+      "modalidad": "REGULAR",
+      "clasesAsistidas": [
+        "C014",
+        "C004"
+      ]
+    },
     {
       "matriculaAlumno": 1004,
       "codigoAsignatura": "MAT01",
@@ -435,6 +589,27 @@
       "clasesAsistidas": []
     },
     {
+      "matriculaAlumno": 1004,
+      "codigoAsignatura": "MAT02",
+      "modalidad": "REGULAR",
+      "clasesAsistidas": [
+        "C005",
+        "C015",
+        "C007",
+        "C010"
+      ]
+    },
+    {
+      "matriculaAlumno": 1005,
+      "codigoAsignatura": "MAT02",
+      "modalidad": "REGULAR",
+      "clasesAsistidas": [
+        "C006",
+        "C008",
+        "C011"
+      ]
+    },
+    {
       "matriculaAlumno": 1006,
       "codigoAsignatura": "MAT02",
       "modalidad": "REGULAR",
@@ -447,8 +622,8 @@
       "codigoAsignatura": "PROG03",
       "modalidad": "REGULAR",
       "clasesAsistidas": [
-        "C015",
-        "C012"
+        "C012",
+        "C015"
       ]
     },
     {
@@ -456,8 +631,8 @@
       "codigoAsignatura": "PROG03",
       "modalidad": "REGULAR",
       "clasesAsistidas": [
-        "C016",
-        "C013"
+        "C013",
+        "C016"
       ]
     },
     {
@@ -508,8 +683,8 @@
       "codigoAsignatura": "OPT05",
       "modalidad": "REGULAR",
       "clasesAsistidas": [
-        "C026",
-        "C023"
+        "C023",
+        "C026"
       ]
     },
     {
@@ -518,6 +693,17 @@
       "modalidad": "REGULAR",
       "clasesAsistidas": [
         "C024"
+      ]
+    },
+    {
+      "matriculaAlumno": 1001,
+      "codigoAsignatura": "OPT06",
+      "modalidad": "REGULAR",
+      "clasesAsistidas": [
+        "C007",
+        "C017",
+        "C027",
+        "C030"
       ]
     },
     {
@@ -538,6 +724,17 @@
       ]
     },
     {
+      "matriculaAlumno": 1002,
+      "codigoAsignatura": "BD07",
+      "modalidad": "REGULAR",
+      "clasesAsistidas": [
+        "C008",
+        "C018",
+        "C032",
+        "C035"
+      ]
+    },
+    {
       "matriculaAlumno": 1005,
       "codigoAsignatura": "BD07",
       "modalidad": "REGULAR",
@@ -552,6 +749,17 @@
       "modalidad": "REGULAR",
       "clasesAsistidas": [
         "C034"
+      ]
+    },
+    {
+      "matriculaAlumno": 1003,
+      "codigoAsignatura": "IS08",
+      "modalidad": "REGULAR",
+      "clasesAsistidas": [
+        "C009",
+        "C019",
+        "C037",
+        "C040"
       ]
     },
     {
@@ -572,6 +780,17 @@
       ]
     },
     {
+      "matriculaAlumno": 1010,
+      "codigoAsignatura": "PAS09",
+      "modalidad": "REGULAR",
+      "clasesAsistidas": [
+        "C010",
+        "C020",
+        "C042",
+        "C045"
+      ]
+    },
+    {
       "matriculaAlumno": 1013,
       "codigoAsignatura": "PAS09",
       "modalidad": "REGULAR",
@@ -589,6 +808,17 @@
       ]
     },
     {
+      "matriculaAlumno": 1011,
+      "codigoAsignatura": "TF10",
+      "modalidad": "REGULAR",
+      "clasesAsistidas": [
+        "C011",
+        "C021",
+        "C047",
+        "C050"
+      ]
+    },
+    {
       "matriculaAlumno": 1014,
       "codigoAsignatura": "TF10",
       "modalidad": "REGULAR",
@@ -603,6 +833,38 @@
       "modalidad": "REGULAR",
       "clasesAsistidas": [
         "C049"
+      ]
+    },
+    {
+      "matriculaAlumno": 9999,
+      "codigoAsignatura": "MAT01",
+      "modalidad": "REGULAR"
+    },
+    {
+      "matriculaAlumno": 1001,
+      "codigoAsignatura": "NO_EXISTE",
+      "modalidad": "REGULAR"
+    },
+    {
+      "matriculaAlumno": 1001,
+      "codigoAsignatura": "MAT01",
+      "modalidad": "OTRA_MODALIDAD"
+    },
+    {
+      "matriculaAlumno": 1001,
+      "codigoAsignatura": "MAT01",
+      "modalidad": "REGULAR",
+      "clasesAsistidas": [
+        "C007"
+      ]
+    },
+    {
+      "matriculaAlumno": 1001,
+      "codigoAsignatura": "MAT01",
+      "modalidad": "REGULAR",
+      "clasesAsistidas": [
+        "C002",
+        "C002"
       ]
     }
   ]
